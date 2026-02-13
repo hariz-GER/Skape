@@ -1,0 +1,114 @@
+/* Marquee Section */
+.marquee-section {
+    padding: 60px 0;
+    background: var(--bg);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.marquee-container {
+    width: 100vw;
+    display: flex;
+    overflow: hidden;
+    user-select: none;
+}
+
+.marquee-track {
+    display: flex;
+    gap: 20px;
+    animation: marquee-scroll 60s linear infinite;
+    padding-left: 20px;
+}
+
+.track-reverse {
+    animation-direction: reverse;
+}
+
+.marquee-item {
+    flex-shrink: 0;
+    width: 420px;
+    height: 280px;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--line);
+}
+
+.marquee-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+    filter: grayscale(0.5) brightness(0.8);
+}
+
+.marquee-item:hover img {
+    transform: scale(1.05);
+    filter: grayscale(0) brightness(1);
+}
+
+@keyframes marquee-scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(calc(-50% - 10px));
+    }
+}
+
+/* Scroll Triggered Text Reveal - Architecture WIP style */
+.reveal-text-section {
+    padding: 140px 0;
+    background: var(--bg);
+    text-align: center;
+}
+
+.reveal-text {
+    font-family: "Cinzel", serif;
+    font-size: clamp(1.8rem, 4vw, 3.5rem);
+    line-height: 1.25;
+    color: rgba(255, 255, 255, 0.1);
+    /* Dimmed by default */
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.reveal-text span {
+    display: inline-block;
+    transition: color 0.5s ease;
+    margin-right: 0.28em;
+}
+
+.reveal-text span.in-view {
+    color: var(--gold);
+}
+
+/* Smooth motion for elements */
+[data-reveal] {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1.2s cubic-bezier(0.2, 0, 0.2, 1), transform 1.2s cubic-bezier(0.2, 0, 0.2, 1);
+}
+
+[data-reveal].in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Page Transitions */
+.app-shell {
+    opacity: 0;
+    animation: pageFadeIn 1.5s ease 1.6s forwards;
+}
+
+@keyframes pageFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

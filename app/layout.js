@@ -1,4 +1,5 @@
 import './globals.css';
+import './motion.css';
 
 export const metadata = {
   title: 'Skape Architecture | Portfolio',

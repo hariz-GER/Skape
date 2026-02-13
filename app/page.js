@@ -12,6 +12,9 @@ import Portfolio from './components/Portfolio';
 import ProjectDetail from './components/ProjectDetail';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import SmoothScroll from './components/SmoothScroll';
+import Marquee from './components/Marquee';
+import RevealText from './components/RevealText';
 import { NAV_ITEMS, MENU_CONTENT, SERVICES_DATA, PROJECTS_DATA } from './data';
 
 function useRevealOnScroll() {
@@ -140,8 +143,11 @@ export default function Page() {
       />
 
       <main>
+        <SmoothScroll />
         <Hero />
+        <RevealText text="We believe architecture is more than just building space; it is about crafting an experience that resonates with the soul. Every line, every shadow, and every material is chosen with intent to create a legacy of timeless design." />
         <Services services={SERVICES_DATA} />
+        <Marquee />
         <About />
         <Portfolio
           filter={filter}
