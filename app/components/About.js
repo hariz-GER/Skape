@@ -18,11 +18,11 @@ export default function About() {
                         <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80" alt="Studio Space" />
                         <div className="about-stats">
                             <div className="stat-item">
-                                <span className="stat-num">100+</span>
+                                <span className="stat-num">90+</span>
                                 <span className="stat-label">Projects Completed</span>
                             </div>
                             <div className="stat-item">
-                                <span className="stat-num">8+</span>
+                                <span className="stat-num">25+</span>
                                 <span className="stat-label">Years Experience</span>
                             </div>
                         </div>

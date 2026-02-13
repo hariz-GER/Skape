@@ -30,9 +30,9 @@ export const MENU_CONTENT = {
         heading: 'Get in Touch',
         items: [
             'skapedesign.in@gmail.com',
-            '0A, Veeraragavalu Nagar, 2nd Main Road, Vinayagapuram, Kolathur, Chennai-99, INDIA',
-            '7871758643',
-            '9940482048'
+            'Kolathur, Chennai-600099, TAMIL NADU, INDIA',
+            '+91 9940482048',
+            '+91 9940340216'
         ]
     }
 };

@@ -34,9 +34,9 @@ const MENU_CONTENT = {
     heading: "Get in Touch",
     items: [
       "skapedesign.in@gmail.com",
-      "0A, Veeraragavalu Nagar, 2nd Main Road, Vinayagapuram, Kolathur, Chennai-99, INDIA",
-      "7871758643",
-      "9940482048"
+      "Kolathur, Chennai-600099, TAMIL NADU, INDIA",
+      "+91 9940482048",
+      "+91 9940340216"
     ]
   }
 };
@@ -479,9 +479,9 @@ function App() {
               <p>Share your requirement and we will respond with next steps.</p>
               <ul className="contact-list">
                 <li>Email: skapedesign.in@gmail.com</li>
-                <li>Phone: 7871758643</li>
-                <li>Phone: 9940482048</li>
-                <li>Studio: 0A, Veeraragavalu Nagar, 2nd Main Road, Vinayagapuram, Kolathur, Chennai-99, INDIA</li>
+                <li>Phone: +91 9940482048</li>
+                <li>Phone: +91 9940340216</li>
+                <li>Studio: Kolathur, Chennai-600099, TAMIL NADU, INDIA</li>
               </ul>
             </div>
 
