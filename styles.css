@@ -165,16 +165,11 @@ p {
   position: sticky;
   top: 0;
   z-index: 60;
-  background: rgba(16, 21, 28, 0.26);
+  background: linear-gradient(rgba(12, 14, 18, 0.48), rgba(12, 14, 18, 0.76)),
+    url("/assets/hero-bg.jpg") center top / cover no-repeat;
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   transition: background 0.3s ease, backdrop-filter 0.3s ease;
-}
-
-.site-header.scrolled {
-  background: transparent;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
 }
 
 .site-header.menu-open {
