@@ -30,7 +30,12 @@ const MENU_CONTENT = {
   },
   contact: {
     heading: 'Get in Touch',
-    items: ['hello@skapearchitecture.com', '+1 (555) 124-8821', '245 Mercer Ave, New York']
+    items: [
+      'skapedesign.in@gmail.com',
+      '0A, Veeraragavalu Nagar, 2nd Main Road, Vinayagapuram, Kolathur, Chennai-99, INDIA',
+      '7871758643',
+      '9940482048'
+    ]
   }
 };
 
@@ -251,6 +256,7 @@ export default function Page() {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState('');
+  const [scrolled, setScrolled] = useState(false);
 
   useRevealOnScroll();
   useCustomCursor();
@@ -278,6 +284,14 @@ export default function Page() {
   useEffect(() => {
     if (mobileOpen) setMenuFocus('');
   }, [mobileOpen]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const filteredProjects = useMemo(() => {
     if (filter === 'all') return PROJECTS;
@@ -331,7 +345,7 @@ export default function Page() {
         </div>
       ) : null}
 
-      <header className={`site-header ${mobileOpen ? 'menu-open' : ''}`} id="top">
+      <header className={`site-header ${mobileOpen ? 'menu-open' : ''} ${scrolled ? 'scrolled' : ''}`} id="top">
         <div className="container nav-wrap">
           <a className="brand" href="#top" aria-label="Skape home">
             <img src="/assets/logo.png" alt="Skape logo" className="brand-logo" />
@@ -487,9 +501,10 @@ export default function Page() {
               <h2>Let's Build Your Project</h2>
               <p>Share your requirement and we will respond with next steps.</p>
               <ul className="contact-list">
-                <li>Email: hello@skapearchitecture.com</li>
-                <li>Phone: +1 (555) 124-8821</li>
-                <li>Studio: 245 Mercer Ave, New York</li>
+                <li>Email: skapedesign.in@gmail.com</li>
+                <li>Phone: 7871758643</li>
+                <li>Phone: 9940482048</li>
+                <li>Studio: 0A, Veeraragavalu Nagar, 2nd Main Road, Vinayagapuram, Kolathur, Chennai-99, INDIA</li>
               </ul>
             </div>
 

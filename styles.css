@@ -47,11 +47,23 @@ h3 {
   font-weight: 500;
 }
 
-h1 { font-size: clamp(2.2rem, 6vw, 4.6rem); }
-h2 { font-size: clamp(1.8rem, 4vw, 3rem); margin-bottom: 14px; }
-h3 { font-size: clamp(1.2rem, 2vw, 1.6rem); margin-bottom: 8px; }
+h1 {
+  font-size: clamp(2.2rem, 6vw, 4.6rem);
+}
 
-p { color: var(--muted); }
+h2 {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  margin-bottom: 14px;
+}
+
+h3 {
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  margin-bottom: 8px;
+}
+
+p {
+  color: var(--muted);
+}
 
 .eyebrow {
   text-transform: uppercase;
@@ -83,14 +95,17 @@ p { color: var(--muted); }
     opacity: 0;
     transform: scale(0.88);
   }
+
   32% {
     opacity: 1;
     transform: scale(1);
   }
+
   68% {
     opacity: 1;
     transform: scale(1);
   }
+
   100% {
     opacity: 0;
     transform: scale(0.96);
@@ -98,8 +113,16 @@ p { color: var(--muted); }
 }
 
 @keyframes splashOut {
-  0%, 82% { opacity: 1; }
-  100% { opacity: 0; visibility: hidden; }
+
+  0%,
+  82% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
 
 .cursor-dot,
@@ -145,6 +168,13 @@ p { color: var(--muted); }
   background: rgba(16, 21, 28, 0.26);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
+  transition: background 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+.site-header.scrolled {
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 .site-header.menu-open {
@@ -355,7 +385,7 @@ p { color: var(--muted); }
   position: absolute;
   inset: 0;
   background: linear-gradient(rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.68)),
-    url("https://images.unsplash.com/photo-1465808028273-23916f3f7e8e?auto=format&fit=crop&w=1900&q=80") center/cover no-repeat;
+    url("/assets/hero-bg.jpg") center/cover no-repeat;
 }
 
 .hero-grid {
@@ -367,7 +397,10 @@ p { color: var(--muted); }
   max-width: 760px;
 }
 
-.hero-copy p { margin-top: 14px; max-width: 60ch; }
+.hero-copy p {
+  margin-top: 14px;
+  max-width: 60ch;
+}
 
 .hero-actions {
   margin-top: 26px;
@@ -529,8 +562,15 @@ p { color: var(--muted); }
 }
 
 @keyframes logoPulse {
-  0% { opacity: 0; transform: translateY(-8px) scale(0.85); }
-  100% { opacity: 1; transform: translateY(0) scale(1); }
+  0% {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.85);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .detail-grid {
@@ -651,8 +691,14 @@ p { color: var(--muted); }
 }
 
 @media (max-width: 980px) {
-  body { cursor: auto; }
-  .cursor-dot, .cursor-ring { display: none; }
+  body {
+    cursor: auto;
+  }
+
+  .cursor-dot,
+  .cursor-ring {
+    display: none;
+  }
 
   .service-grid,
   .project-grid,
@@ -700,13 +746,24 @@ p { color: var(--muted); }
 }
 
 @media (max-width: 620px) {
-  .section { padding: 74px 0; }
-  .hero { min-height: 80vh; }
+  .section {
+    padding: 74px 0;
+  }
+
+  .hero {
+    min-height: 80vh;
+  }
+
   .project-grid,
   .photo-layout {
     grid-template-columns: 1fr;
   }
 
-  .photo-main { grid-column: span 1; }
-  .hero-actions .btn { width: 100%; }
+  .photo-main {
+    grid-column: span 1;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+  }
 }

@@ -32,7 +32,12 @@ const MENU_CONTENT = {
   },
   contact: {
     heading: "Get in Touch",
-    items: ["hello@skapearchitecture.com", "+1 (555) 124-8821", "245 Mercer Ave, New York"]
+    items: [
+      "skapedesign.in@gmail.com",
+      "0A, Veeraragavalu Nagar, 2nd Main Road, Vinayagapuram, Kolathur, Chennai-99, INDIA",
+      "7871758643",
+      "9940482048"
+    ]
   }
 };
 
@@ -229,6 +234,7 @@ function App() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("");
+  const [scrolled, setScrolled] = useState(false);
 
   useRevealOnScroll();
   useCustomCursor();
@@ -256,6 +262,14 @@ function App() {
   useEffect(() => {
     if (mobileOpen) setMenuFocus("");
   }, [mobileOpen]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const filteredProjects = useMemo(() => {
     if (filter === "all") return PROJECTS;
@@ -303,14 +317,14 @@ function App() {
       <div id="cursorRing" className="cursor-ring"></div>
 
       ${showSplash
-        ? html`
+      ? html`
             <div className="splash">
               <img src="assets/logo.png" alt="Skape" className="splash-logo" />
             </div>
           `
-        : null}
+      : null}
 
-      <header className=${`site-header ${mobileOpen ? "menu-open" : ""}`} id="top">
+      <header className=${`site-header ${mobileOpen ? "menu-open" : ""} ${scrolled ? "scrolled" : ""}`} id="top">
         <div className="container nav-wrap">
           <a className="brand" href="#top" aria-label="Skape home">
             <img src="assets/logo.png" alt="Skape logo" className="brand-logo" />
@@ -336,29 +350,29 @@ function App() {
           <div className="menu-col menu-nav-col">
             <nav className="menu-links">
               ${NAV_ITEMS.map(
-                (item) =>
-                  html`<button
+        (item) =>
+          html`<button
                     type="button"
                     className=${`menu-main-link ${menuFocus === item.id ? "active" : ""}`}
                     onClick=${() => setMenuFocus((prev) => (prev === item.id ? "" : item.id))}
                   >${item.label}</button>`
-              )}
+      )}
             </nav>
           </div>
           <div className=${`menu-col menu-info-col ${activeMenu ? "open" : ""}`}>
             <p className="eyebrow">${activeMenu ? activeMenu.heading : "Navigation"}</p>
             ${activeMenu
-              ? html`
+      ? html`
                   <a className="menu-jump open" href=${`#${menuFocus}`} onClick=${() => setMobileOpen(false)}>
                     Open ${activeNav ? activeNav.label : "Section"}
                   </a>
                 `
-              : html`<span className="menu-jump"></span>`}
+      : html`<span className="menu-jump"></span>`}
             <ul className=${`menu-service-links ${activeMenu ? "open" : ""}`}>
               ${(activeMenu ? activeMenu.items : []).map(
-                (item, index) =>
-                  html`<li style=${{ "--item-delay": `${index * 0.14}s` }}>${item}</li>`
-              )}
+        (item, index) =>
+          html`<li style=${{ "--item-delay": `${index * 0.14}s` }}>${item}</li>`
+      )}
             </ul>
             <p className=${`menu-placeholder ${activeMenu ? "hide" : ""}`}>
               Click a section on the left to view its subtopics.
@@ -391,13 +405,13 @@ function App() {
             </div>
             <div className="service-grid">
               ${SERVICES.map(
-                (service) => html`
+        (service) => html`
                   <article className="service-card" data-reveal>
                     <h3>${service.title}</h3>
                     <p>${service.text}</p>
                   </article>
                 `
-              )}
+      )}
             </div>
           </div>
         </section>
@@ -424,17 +438,17 @@ function App() {
 
             <div className="filters" data-reveal>
               ${["all", "residential", "commercial"].map(
-                (type) => html`
+        (type) => html`
                   <button className=${`filter-btn ${filter === type ? "active" : ""}`} onClick=${() => setFilter(type)}>
                     ${type[0].toUpperCase() + type.slice(1)}
                   </button>
                 `
-              )}
+      )}
             </div>
 
             <div className="project-grid">
               ${filteredProjects.map(
-                (project) => html`
+        (project) => html`
                   <article className="project-card" data-reveal>
                     <img src=${project.cover} alt=${project.title} loading="lazy" />
                     <div className="project-overlay">
@@ -445,14 +459,14 @@ function App() {
                     </div>
                   </article>
                 `
-              )}
+      )}
             </div>
           </div>
         </section>
 
         ${activeProject
-          ? html`<${ProjectDetail} project=${activeProject} onClose=${() => setActiveProjectId("")} />`
-          : null}
+      ? html`<${ProjectDetail} project=${activeProject} onClose=${() => setActiveProjectId("")} />`
+      : null}
 
         <section className="section" id="contact">
           <div className="container split contact-split">
@@ -461,9 +475,10 @@ function App() {
               <h2>Let's Build Your Project</h2>
               <p>Share your requirement and we will respond with next steps.</p>
               <ul className="contact-list">
-                <li>Email: hello@skapearchitecture.com</li>
-                <li>Phone: +1 (555) 124-8821</li>
-                <li>Studio: 245 Mercer Ave, New York</li>
+                <li>Email: skapedesign.in@gmail.com</li>
+                <li>Phone: 7871758643</li>
+                <li>Phone: 9940482048</li>
+                <li>Studio: 0A, Veeraragavalu Nagar, 2nd Main Road, Vinayagapuram, Kolathur, Chennai-99, INDIA</li>
               </ul>
             </div>
 
