@@ -204,6 +204,12 @@ p {
   color: var(--text);
   cursor: none;
   padding: 4px;
+  transition: opacity 0.3s ease;
+}
+
+.site-header.scrolled:not(.menu-open) .menu-toggle {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .menu-box {
