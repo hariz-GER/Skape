@@ -191,12 +191,27 @@ p {
   backdrop-filter: none;
 }
 
+.site-header.scrolled.brand-only-mode {
+  background: transparent;
+  border-bottom-color: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
 .nav-wrap {
   min-height: 110px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.brand-only {
+  width: min(1340px, 94%);
+  margin-inline: auto;
+  min-height: 78px;
+  display: flex;
+  align-items: center;
 }
 
 .site-header.nav-hidden {
