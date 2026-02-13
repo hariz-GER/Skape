@@ -1,8 +1,8 @@
 'use client';
 
-export default function Header({ mobileOpen, setMobileOpen, scrolled }) {
+export default function Header({ mobileOpen, setMobileOpen, scrolled, hideHeader }) {
     return (
-        <header className={`site-header ${mobileOpen ? 'menu-open' : ''} ${scrolled ? 'scrolled' : ''}`} id="top">
+        <header className={`site-header ${mobileOpen ? 'menu-open' : ''} ${scrolled ? 'scrolled' : ''} ${hideHeader ? 'nav-hidden' : ''}`} id="top">
             <div className="container nav-wrap">
                 <a className="brand" href="#top" aria-label="Skape home">
                     <img src="/assets/logo.png" alt="Skape logo" className="brand-logo" />

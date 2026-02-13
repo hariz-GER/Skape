@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import CustomCursor from './components/CustomCursor';
 import Splash from './components/Splash';
 import Header from './components/Header';
@@ -52,6 +52,8 @@ export default function Page() {
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState('');
   const [scrolled, setScrolled] = useState(false);
+  const [hideHeader, setHideHeader] = useState(false);
+  const lastScrollY = useRef(0);
 
   useRevealOnScroll();
 
@@ -81,11 +83,26 @@ export default function Page() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      const currentY = window.scrollY;
+      setScrolled(currentY > 50);
+
+      if (currentY < 70) {
+        setHideHeader(false);
+      } else if (!mobileOpen) {
+        setHideHeader(currentY > lastScrollY.current);
+      }
+
+      lastScrollY.current = currentY;
     };
+
+    lastScrollY.current = window.scrollY;
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [mobileOpen]);
+
+  useEffect(() => {
+    if (mobileOpen) setHideHeader(false);
+  }, [mobileOpen]);
 
   const filteredProjects = useMemo(() => {
     if (filter === 'all') return PROJECTS_DATA;
@@ -131,7 +148,7 @@ export default function Page() {
 
       {showSplash && <Splash />}
 
-      <Header mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} scrolled={scrolled} />
+      <Header mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} scrolled={scrolled} hideHeader={hideHeader} />
 
       <MenuOverlay
         mobileOpen={mobileOpen}

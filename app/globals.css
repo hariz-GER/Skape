@@ -196,6 +196,20 @@ p {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.site-header.nav-hidden {
+  background: transparent;
+  border-bottom-color: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+.site-header.nav-hidden .nav-wrap {
+  opacity: 0;
+  transform: translateY(-16px);
+  pointer-events: none;
 }
 
 .brand-logo {
