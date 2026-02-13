@@ -357,7 +357,10 @@ export default function Page() {
             onClick={() => setMobileOpen((v) => !v)}
           >
             <span className="menu-box" />
-            <span className="menu-cross">×</span>
+            <div className="menu-lines">
+              <span />
+              <span />
+            </div>
           </button>
         </div>
       </header>

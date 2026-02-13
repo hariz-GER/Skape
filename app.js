@@ -336,7 +336,10 @@ function App() {
             onClick=${() => setMobileOpen((v) => !v)}
           >
             <span className="menu-box"></span>
-            <span className="menu-cross">×</span>
+            <div className="menu-lines">
+              <span></span>
+              <span></span>
+            </div>
           </button>
         </div>
       </header>
