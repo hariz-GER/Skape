@@ -1,7 +1,7 @@
 'use client';
 
 export default function Header({ mobileOpen, setMobileOpen, scrolled, hideHeader }) {
-    const showBrandOnly = scrolled && !mobileOpen && !hideHeader;
+    const showBrandOnly = scrolled && !mobileOpen;
 
     return (
         <header
