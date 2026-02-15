@@ -29,16 +29,36 @@ export default function About() {
     ];
 
     return (
-        <section className="section" id="about">
+        <section className="section about-page" id="about">
             <div className="container">
-                <div className="section-head" data-reveal>
-                    <p className="eyebrow">Skape</p>
-                    <h2>Read More</h2>
-                    <p className="about-separator">||</p>
+                <div className="about-hero" data-reveal>
+                    <div className="about-hero-overlay">
+                        <p className="eyebrow">About</p>
+                        <h1>Skape · Shape of Design</h1>
+                        <p className="about-hero-lead">
+                            Where 30 years of construction intelligence meets a modern interior vision for timeless,
+                            deeply personal spaces.
+                        </p>
+                        <div className="about-metrics">
+                            <div className="about-metric">
+                                <span>30+</span>
+                                <p>Years in Construction</p>
+                            </div>
+                            <div className="about-metric">
+                                <span>4+</span>
+                                <p>Years in Interior Design</p>
+                            </div>
+                            <div className="about-metric">
+                                <span>1</span>
+                                <p>End-to-End Studio</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div className="about-details">
-                    <article className="about-block" data-reveal>
+                    <article className="about-block about-block-intro" data-reveal>
+                        <h2>The Story</h2>
                         <p>
                             I am a creator driven by the belief that every structure tells a story. With a career
                             spanning over 30 years in the construction industry, I have dedicated my life to mastering
@@ -56,7 +76,7 @@ export default function About() {
                         </p>
                     </article>
 
-                    <article className="about-block" data-reveal>
+                    <article className="about-block about-block-philosophy" data-reveal>
                         <h3>Interior Design Philosophy</h3>
                         <p>
                             At Shape of Design, our philosophy is rooted in the Science of Space. We believe that
@@ -75,7 +95,7 @@ export default function About() {
                         </p>
                     </article>
 
-                    <article className="about-block" data-reveal>
+                    <article className="about-block about-block-values" data-reveal>
                         <h3>Core Values</h3>
                         <p>
                             Our core values are the pillars upon which Shape of Design was built. They represent 30
@@ -90,7 +110,7 @@ export default function About() {
                         </ul>
                     </article>
 
-                    <article className="about-block" data-reveal>
+                    <article className="about-block about-block-studio" data-reveal>
                         <h3>About My Studio</h3>
                         <p>
                             Shape of Design is a multidisciplinary firm where 30 years of construction expertise meets
@@ -102,13 +122,17 @@ export default function About() {
                         </p>
                     </article>
 
-                    <div className="about-actions" data-reveal>
+                    <div className="about-cta-card" data-reveal>
+                        <h3>Start Your Project</h3>
+                        <p>Tell us what you want to build, renovate, or redesign. We will take it from concept to completion.</p>
+                        <div className="about-actions">
                         <a href="/#contact" className="btn btn-primary btn-min">
                             Contact Us
                         </a>
                         <a href="/#contact" className="btn btn-line btn-min">
                             Forms
                         </a>
+                        </div>
                     </div>
                 </div>
             </div>
