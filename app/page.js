@@ -7,7 +7,6 @@ import Header from './components/Header';
 import MenuOverlay from './components/MenuOverlay';
 import Hero from './components/Hero';
 import Services from './components/Services';
-import About from './components/About';
 import Portfolio from './components/Portfolio';
 import ProjectDetail from './components/ProjectDetail';
 import Contact from './components/Contact';
@@ -165,7 +164,6 @@ export default function Page() {
         <RevealText text="We believe architecture is more than just building space; it is about crafting an experience that resonates with the soul. Every line, every shadow, and every material is chosen with intent to create a legacy of timeless design." />
         <Services services={SERVICES_DATA} />
         <Marquee />
-        <About />
         <Portfolio
           filter={filter}
           setFilter={setFilter}

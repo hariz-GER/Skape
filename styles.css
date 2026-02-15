@@ -470,6 +470,112 @@ p {
   margin-bottom: 22px;
 }
 
+.about-section {
+  padding-top: 40px;
+}
+
+.about-hero {
+  position: relative;
+  min-height: min(78vh, 880px);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  background:
+    linear-gradient(120deg, rgba(8, 10, 14, 0.24), rgba(8, 10, 14, 0.06)),
+    url("https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=2000&q=80")
+      center/cover no-repeat;
+}
+
+.about-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgba(4, 6, 8, 0.94), rgba(4, 6, 8, 0.45) 45%, rgba(4, 6, 8, 0.05) 72%);
+}
+
+.about-hero-overlay {
+  position: relative;
+  z-index: 1;
+  width: min(720px, 100%);
+  padding: clamp(24px, 4vw, 46px);
+  display: grid;
+  gap: 14px;
+}
+
+.about-kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.74rem;
+  color: #d2d6de;
+}
+
+.about-kicker span {
+  color: #96a0b0;
+  margin-inline: 10px;
+}
+
+.about-hero-overlay h2 {
+  margin: 0;
+  font-size: clamp(2.2rem, 6vw, 4.4rem);
+  color: #fff;
+}
+
+.about-hero-overlay p {
+  color: #d7dce6;
+  max-width: 58ch;
+}
+
+.about-read-more {
+  margin-top: 8px;
+  width: fit-content;
+  padding-inline: 34px;
+}
+
+.about-details-grid {
+  display: grid;
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.about-card {
+  padding: clamp(20px, 2.8vw, 36px);
+  border: 1px solid var(--line);
+  background: linear-gradient(160deg, var(--bg-soft), var(--bg-elev));
+  display: grid;
+  gap: 14px;
+}
+
+.about-card h3 {
+  color: var(--gold-soft);
+  margin: 0;
+}
+
+.about-values-list {
+  list-style: none;
+  display: grid;
+  gap: 14px;
+}
+
+.about-values-list li {
+  border-left: 2px solid rgba(198, 166, 107, 0.55);
+  padding-left: 12px;
+  display: grid;
+  gap: 4px;
+}
+
+.about-values-list strong {
+  color: var(--text);
+}
+
+.about-actions {
+  margin-top: 8px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
 .service-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -760,6 +866,14 @@ p {
   .menu-main-link {
     font-size: clamp(1.7rem, 6vw, 2.6rem);
   }
+
+  .about-hero {
+    min-height: 68vh;
+  }
+
+  .about-kicker span {
+    margin-inline: 6px;
+  }
 }
 
 @media (max-width: 620px) {
@@ -781,6 +895,23 @@ p {
   }
 
   .hero-actions .btn {
+    width: 100%;
+  }
+
+  .about-hero {
+    min-height: 74vh;
+    background-position: 64% center;
+  }
+
+  .about-kicker {
+    line-height: 1.6;
+  }
+
+  .about-kicker span {
+    margin-inline: 4px;
+  }
+
+  .about-actions .btn {
     width: 100%;
   }
 }

@@ -12,19 +12,21 @@ export const MENU_CONTENT = {
         heading: 'Services',
         items: [
             'Architectural Design',
-            'Planning Applications',
+            {
+                label: 'Planning Applications',
+                children: ['Residential', 'Commercial']
+            },
             'Interior Design',
-            'Conservation & Heritage Design',
             'Create & Construct'
         ]
     },
     portfolio: {
         heading: 'Portfolio',
-        items: ['Residential', 'Commercial', 'Conservation & Heritage']
+        items: ['Residential', 'Commercial']
     },
     about: {
-        heading: 'About Studio',
-        items: ['Practice Profile', 'Design Process', 'Design + Build Team']
+        heading: 'About',
+        items: ['Read More', 'Interior Design Philosophy', 'Core Values', 'About My Studio']
     },
     contact: {
         heading: 'Get in Touch',
