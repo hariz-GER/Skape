@@ -85,6 +85,22 @@ export default function About() {
                             structural history and modern living. We believe that a space must perform before it can
                             please.
                         </p>
+                        <div className="about-philosophy-gallery">
+                            <figure className="about-philosophy-photo">
+                                <img
+                                    src="https://images.unsplash.com/photo-1617104678098-de229db51175?auto=format&fit=crop&w=1200&q=80"
+                                    alt="Interior with warm material palette and soft natural light"
+                                    loading="lazy"
+                                />
+                            </figure>
+                            <figure className="about-philosophy-photo">
+                                <img
+                                    src="https://images.unsplash.com/photo-1617104551722-3b2d513664c9?auto=format&fit=crop&w=1200&q=80"
+                                    alt="Modern lounge area focused on calm textures and ergonomic flow"
+                                    loading="lazy"
+                                />
+                            </figure>
+                        </div>
                         <p>
                             Because of our 30-year foundation in construction, our design process is uniquely informed
                             by what is possible, not just what is fashionable. We prioritize honest materials,

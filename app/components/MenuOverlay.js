@@ -1,18 +1,33 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 
 export default function MenuOverlay({ mobileOpen, setMobileOpen, menuFocus, setMenuFocus, NAV_ITEMS, MENU_CONTENT }) {
     const router = useRouter();
     const pathname = usePathname();
+    const previousPathnameRef = useRef(pathname);
     const activeMenu = menuFocus ? MENU_CONTENT[menuFocus] : null;
     const activeNav = menuFocus ? NAV_ITEMS.find((item) => item.id === menuFocus) : null;
     const [expandedItem, setExpandedItem] = useState('');
+    const [isRouteLoading, setIsRouteLoading] = useState(false);
 
     useEffect(() => {
         setExpandedItem('');
     }, [menuFocus, mobileOpen]);
+
+    useEffect(() => {
+        if (isRouteLoading && pathname !== previousPathnameRef.current) {
+            setIsRouteLoading(false);
+        }
+        previousPathnameRef.current = pathname;
+    }, [pathname, isRouteLoading]);
+
+    useEffect(() => {
+        if (!isRouteLoading) return;
+        const timeout = window.setTimeout(() => setIsRouteLoading(false), 10000);
+        return () => window.clearTimeout(timeout);
+    }, [isRouteLoading]);
 
     const selectedExpandable = activeMenu
         ? activeMenu.items.find(
@@ -32,6 +47,7 @@ export default function MenuOverlay({ mobileOpen, setMobileOpen, menuFocus, setM
             setMenuFocus('');
             setMobileOpen(false);
             if (pathname !== '/about') {
+                setIsRouteLoading(true);
                 router.push('/about');
                 return;
             }
@@ -53,79 +69,87 @@ export default function MenuOverlay({ mobileOpen, setMobileOpen, menuFocus, setM
     };
 
     return (
-        <div
-            className={`menu-overlay ${mobileOpen ? 'open' : ''}`}
-            aria-hidden={!mobileOpen}
-            onClick={() => setMobileOpen(false)}
-        >
-            <div
-                className={`container menu-overlay-inner ${isPlanningOpen ? 'has-submenu' : ''}`}
-                onClick={(event) => event.stopPropagation()}
-            >
-                <div className="menu-col menu-nav-col planning-menu-nav">
-                    <nav className="menu-links">
-                        {NAV_ITEMS.map((item) => (
-                            <button
-                                key={item.id}
-                                type="button"
-                                className={`menu-main-link ${menuFocus === item.id ? 'active' : ''}`}
-                                onClick={() => onMainNavClick(item.id)}
-                            >
-                                {item.label}
-                            </button>
-                        ))}
-                    </nav>
+        <>
+            {isRouteLoading && (
+                <div className="route-loading-overlay" role="status" aria-live="polite" aria-label="Loading about page">
+                    <img src="/assets/logo.png" alt="Skape loading" className="route-loading-logo" />
                 </div>
-                <div
-                    className={`menu-col menu-info-col ${activeMenu ? 'open' : ''} planning-menu-info ${isPlanningOpen ? 'planning-open' : ''}`}
-                >
-                    <p className="eyebrow">{activeMenu ? activeMenu.heading : 'Navigation'}</p>
-                    {activeMenu ? (
-                        <a className="menu-jump open" href={`#${menuFocus}`} onClick={() => setMobileOpen(false)}>
-                            Open {activeNav ? activeNav.label : 'Section'}
-                        </a>
-                    ) : (
-                        <span className="menu-jump" />
-                    )}
-                    <ul className={`menu-service-links ${activeMenu ? 'open' : ''}`}>
-                        {(activeMenu ? activeMenu.items : []).map((item, index) => {
-                            const label = typeof item === 'string' ? item : item.label;
-                            const children = typeof item === 'object' ? item.children || [] : [];
-                            const isExpandable = children.length > 0;
-                            const isOpen = expandedItem === label;
+            )}
 
-                            return (
-                                <li key={`${label}-${index}`} style={{ '--item-delay': `${index * 0.14}s` }}>
-                                    {isExpandable ? (
-                                        <button
-                                            type="button"
-                                            className={`menu-service-trigger ${isOpen ? 'open' : ''}`}
-                                            onClick={() => setExpandedItem((prev) => (prev === label ? '' : label))}
-                                            aria-expanded={isOpen}
-                                        >
-                                            {label}
-                                        </button>
-                                    ) : (
-                                        label
-                                    )}
+            <div
+                className={`menu-overlay ${mobileOpen ? 'open' : ''}`}
+                aria-hidden={!mobileOpen}
+                onClick={() => setMobileOpen(false)}
+            >
+                <div
+                    className={`container menu-overlay-inner ${isPlanningOpen ? 'has-submenu' : ''}`}
+                    onClick={(event) => event.stopPropagation()}
+                >
+                    <div className="menu-col menu-nav-col planning-menu-nav">
+                        <nav className="menu-links">
+                            {NAV_ITEMS.map((item) => (
+                                <button
+                                    key={item.id}
+                                    type="button"
+                                    className={`menu-main-link ${menuFocus === item.id ? 'active' : ''}`}
+                                    onClick={() => onMainNavClick(item.id)}
+                                >
+                                    {item.label}
+                                </button>
+                            ))}
+                        </nav>
+                    </div>
+                    <div
+                        className={`menu-col menu-info-col ${activeMenu ? 'open' : ''} planning-menu-info ${isPlanningOpen ? 'planning-open' : ''}`}
+                    >
+                        <p className="eyebrow">{activeMenu ? activeMenu.heading : 'Navigation'}</p>
+                        {activeMenu ? (
+                            <a className="menu-jump open" href={`#${menuFocus}`} onClick={() => setMobileOpen(false)}>
+                                Open {activeNav ? activeNav.label : 'Section'}
+                            </a>
+                        ) : (
+                            <span className="menu-jump" />
+                        )}
+                        <ul className={`menu-service-links ${activeMenu ? 'open' : ''}`}>
+                            {(activeMenu ? activeMenu.items : []).map((item, index) => {
+                                const label = typeof item === 'string' ? item : item.label;
+                                const children = typeof item === 'object' ? item.children || [] : [];
+                                const isExpandable = children.length > 0;
+                                const isOpen = expandedItem === label;
+
+                                return (
+                                    <li key={`${label}-${index}`} style={{ '--item-delay': `${index * 0.14}s` }}>
+                                        {isExpandable ? (
+                                            <button
+                                                type="button"
+                                                className={`menu-service-trigger ${isOpen ? 'open' : ''}`}
+                                                onClick={() => setExpandedItem((prev) => (prev === label ? '' : label))}
+                                                aria-expanded={isOpen}
+                                            >
+                                                {label}
+                                            </button>
+                                        ) : (
+                                            label
+                                        )}
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                        <p className={`menu-placeholder ${activeMenu ? 'hide' : ''}`}>
+                            Click a section on the left to view its subtopics.
+                        </p>
+                    </div>
+                    <div className={`menu-col menu-submenu-col ${isPlanningOpen ? 'open' : ''}`}>
+                        <ul className={`menu-submenu-links ${isPlanningOpen ? 'open' : ''}`}>
+                            {selectedChildren.map((child, index) => (
+                                <li key={`${expandedItem}-${child}`} style={{ '--item-delay': `${index * 0.16}s` }}>
+                                    {child}
                                 </li>
-                            );
-                        })}
-                    </ul>
-                    <p className={`menu-placeholder ${activeMenu ? 'hide' : ''}`}>
-                        Click a section on the left to view its subtopics.
-                    </p>
-                </div>
-                <div className={`menu-col menu-submenu-col ${isPlanningOpen ? 'open' : ''}`}>
-                    <ul className={`menu-submenu-links ${isPlanningOpen ? 'open' : ''}`}>
-                        {selectedChildren.map((child, index) => (
-                            <li key={`${expandedItem}-${child}`} style={{ '--item-delay': `${index * 0.16}s` }}>
-                                {child}
-                            </li>
-                        ))}
-                    </ul>
+                            ))}
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 }
