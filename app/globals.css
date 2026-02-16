@@ -107,7 +107,7 @@ p {
 .splash-logo-stage {
   position: relative;
   z-index: 2;
-  width: min(36vw, 240px);
+  width: clamp(320px, 72vw, 620px);
   opacity: 0;
   animation: logoStageFade 4s ease forwards;
 }
