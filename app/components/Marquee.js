@@ -1,29 +1,42 @@
 'use client';
 
-const MARQUEE_IMAGES = [
-    'https://images.unsplash.com/photo-1600585154340-be6199f74709?auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1600210492486-724fe5c67fb3?auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=800&q=80',
+const MARQUEE_ROW_ONE = [
+    'https://minaleandmann.com/wp-content/uploads/2018/01/2-8.jpg',
+    'https://minaleandmann.com/wp-content/uploads/2018/01/3-7.jpg',
+    'https://minaleandmann.com/wp-content/uploads/2018/01/4-7.jpg',
+    'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1616486029423-aaa4789e8c9a?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1600210492493-0946911123ea?auto=format&fit=crop&w=1200&q=80',
+];
+
+const MARQUEE_ROW_TWO = [
+    'https://minaleandmann.com/wp-content/uploads/2018/01/5-5.jpg',
+    'https://minaleandmann.com/wp-content/uploads/2018/01/6-3.jpg',
+    'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80',
+    '/assets/hero-bg.jpg',
+    'https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1600047509358-9dc75507daeb?auto=format&fit=crop&w=1200&q=80',
+];
+
+const LOCAL_FALLBACK_IMAGES = [
+    '/assets/hero-bg.jpg',
+    '/assets/about-philosophy-reference.jpg',
 ];
 
 export default function Marquee() {
+    const onImageError = (event, idx) => {
+        if (event.currentTarget.dataset.fallbackApplied === '1') return;
+        event.currentTarget.dataset.fallbackApplied = '1';
+        event.currentTarget.src = LOCAL_FALLBACK_IMAGES[idx % LOCAL_FALLBACK_IMAGES.length];
+    };
+
     return (
         <section className="marquee-section">
             <div className="marquee-container">
                 <div className="marquee-track">
-                    {/* First set */}
-                    {MARQUEE_IMAGES.map((src, idx) => (
+                    {MARQUEE_ROW_ONE.map((src, idx) => (
                         <div key={`m1-${idx}`} className="marquee-item">
-                            <img src={src} alt={`Arch ${idx}`} />
-                        </div>
-                    ))}
-                    {/* Duplicate set for seamless loop */}
-                    {MARQUEE_IMAGES.map((src, idx) => (
-                        <div key={`m2-${idx}`} className="marquee-item">
-                            <img src={src} alt={`Arch duplicate ${idx}`} />
+                            <img src={src} alt={`Architecture showcase ${idx + 1}`} loading="lazy" onError={(event) => onImageError(event, idx)} />
                         </div>
                     ))}
                 </div>
@@ -31,16 +44,9 @@ export default function Marquee() {
 
             <div className="marquee-container" data-direction="right">
                 <div className="marquee-track track-reverse">
-                    {/* First set */}
-                    {MARQUEE_IMAGES.slice().reverse().map((src, idx) => (
+                    {MARQUEE_ROW_TWO.map((src, idx) => (
                         <div key={`mr1-${idx}`} className="marquee-item">
-                            <img src={src} alt={`Arch rev ${idx}`} />
-                        </div>
-                    ))}
-                    {/* Duplicate set */}
-                    {MARQUEE_IMAGES.slice().reverse().map((src, idx) => (
-                        <div key={`mr2-${idx}`} className="marquee-item">
-                            <img src={src} alt={`Arch rev duplicate ${idx}`} />
+                            <img src={src} alt={`Architecture reverse ${idx + 1}`} loading="lazy" onError={(event) => onImageError(event, idx)} />
                         </div>
                     ))}
                 </div>

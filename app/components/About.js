@@ -88,16 +88,26 @@ export default function About() {
                         <div className="about-philosophy-gallery">
                             <figure className="about-philosophy-photo">
                                 <img
-                                    src="https://images.unsplash.com/photo-1617104678098-de229db51175?auto=format&fit=crop&w=1200&q=80"
-                                    alt="Interior with warm material palette and soft natural light"
+                                    src="/assets/about-philosophy-1.jpg"
+                                    alt="Contemporary interior with layered textures and warm natural light"
                                     loading="lazy"
+                                    onError={(event) => {
+                                        if (event.currentTarget.dataset.fallbackApplied === '1') return;
+                                        event.currentTarget.dataset.fallbackApplied = '1';
+                                        event.currentTarget.src = '/assets/about-philosophy-2.jpg';
+                                    }}
                                 />
                             </figure>
                             <figure className="about-philosophy-photo">
                                 <img
-                                    src="https://images.unsplash.com/photo-1617104551722-3b2d513664c9?auto=format&fit=crop&w=1200&q=80"
-                                    alt="Modern lounge area focused on calm textures and ergonomic flow"
+                                    src="/assets/about-philosophy-2.jpg"
+                                    alt="Refined interior composition with balanced form and material contrast"
                                     loading="lazy"
+                                    onError={(event) => {
+                                        if (event.currentTarget.dataset.fallbackApplied === '1') return;
+                                        event.currentTarget.dataset.fallbackApplied = '1';
+                                        event.currentTarget.src = '/assets/about-philosophy-1.jpg';
+                                    }}
                                 />
                             </figure>
                         </div>

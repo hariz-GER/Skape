@@ -18,12 +18,13 @@
 .marquee-track {
     display: flex;
     gap: 20px;
-    animation: marquee-scroll 60s linear infinite;
+    width: max-content;
+    animation: marquee-pan 40s ease-in-out infinite alternate;
     padding-left: 20px;
 }
 
 .track-reverse {
-    animation-direction: reverse;
+    animation-direction: alternate-reverse;
 }
 
 .marquee-item {
@@ -40,21 +41,21 @@
     height: 100%;
     object-fit: cover;
     transition: transform 0.6s ease;
-    filter: grayscale(0.5) brightness(0.8);
+    filter: none;
 }
 
 .marquee-item:hover img {
     transform: scale(1.05);
-    filter: grayscale(0) brightness(1);
+    filter: none;
 }
 
-@keyframes marquee-scroll {
+@keyframes marquee-pan {
     0% {
         transform: translateX(0);
     }
 
     100% {
-        transform: translateX(calc(-50% - 10px));
+        transform: translateX(calc(-100% + 100vw));
     }
 }
 
@@ -122,7 +123,7 @@
     .marquee-track {
         gap: 14px;
         padding-left: 14px;
-        animation-duration: 52s;
+        animation-duration: 34s;
     }
 
     .marquee-item {
@@ -149,7 +150,7 @@
     .marquee-track {
         gap: 10px;
         padding-left: 10px;
-        animation-duration: 40s;
+        animation-duration: 26s;
     }
 
     .marquee-item {
