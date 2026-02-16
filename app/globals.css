@@ -82,49 +82,95 @@ p {
   z-index: 90;
   display: grid;
   place-items: center;
+  overflow: hidden;
+}
+
+.splash-curtain {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 50%;
   background: var(--bg);
-  animation: splashOut 1.9s ease forwards;
+  will-change: transform;
+}
+
+.splash-curtain-top {
+  top: 0;
+  animation: splashCurtainTop 2s cubic-bezier(0.2, 0.7, 0, 1) 4s forwards;
+}
+
+.splash-curtain-bottom {
+  bottom: 0;
+  animation: splashCurtainBottom 2s cubic-bezier(0.2, 0.7, 0, 1) 4s forwards;
+}
+
+.splash-logo-stage {
+  position: relative;
+  z-index: 2;
+  width: min(36vw, 240px);
+  opacity: 0;
+  animation: logoStageFade 4s ease forwards;
 }
 
 .splash-logo {
-  width: min(36vw, 240px);
-  opacity: 0;
-  transform: scale(0.88);
-  animation: logoInOut 1.9s ease forwards;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.35));
 }
 
-@keyframes logoInOut {
+.splash-logo-wipe {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--bg) 0%, var(--bg) 58%, rgba(15, 17, 21, 0.84) 82%, rgba(15, 17, 21, 0) 100%);
+  transform: translateX(-105%);
+  animation: logoLeftToRightWipe 4s linear forwards;
+}
+
+@keyframes logoStageFade {
   0% {
     opacity: 0;
-    transform: scale(0.88);
   }
 
-  32% {
+  12% {
     opacity: 1;
-    transform: scale(1);
   }
 
-  68% {
+  88% {
     opacity: 1;
-    transform: scale(1);
   }
 
   100% {
     opacity: 0;
-    transform: scale(0.96);
   }
 }
 
-@keyframes splashOut {
-
-  0%,
-  82% {
-    opacity: 1;
+@keyframes logoLeftToRightWipe {
+  0% {
+    transform: translateX(-105%);
   }
 
   100% {
-    opacity: 0;
-    visibility: hidden;
+    transform: translateX(105%);
+  }
+}
+
+@keyframes splashCurtainTop {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-101%);
+  }
+}
+
+@keyframes splashCurtainBottom {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(101%);
   }
 }
 

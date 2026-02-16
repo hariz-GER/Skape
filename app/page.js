@@ -57,7 +57,7 @@ export default function Page() {
   useRevealOnScroll();
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setShowSplash(false), 1600);
+    const timer = window.setTimeout(() => setShowSplash(false), 6000);
     return () => window.clearTimeout(timer);
   }, []);
 
