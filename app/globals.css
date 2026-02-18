@@ -109,7 +109,7 @@ p {
   z-index: 2;
   width: clamp(320px, 72vw, 620px);
   opacity: 0;
-  animation: logoStageFade 4s ease forwards;
+  animation: logoStageFade 5s ease forwards;
 }
 
 .splash-logo {
