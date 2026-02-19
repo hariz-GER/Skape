@@ -3,7 +3,15 @@
 import { useEffect, useRef, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 
-export default function MenuOverlay({ mobileOpen, setMobileOpen, menuFocus, setMenuFocus, NAV_ITEMS, MENU_CONTENT }) {
+export default function MenuOverlay({
+    mobileOpen,
+    setMobileOpen,
+    menuFocus,
+    setMenuFocus,
+    NAV_ITEMS,
+    MENU_CONTENT,
+    onSubmenuItemClick
+}) {
     const router = useRouter();
     const pathname = usePathname();
     const previousPathnameRef = useRef(pathname);
@@ -40,6 +48,38 @@ export default function MenuOverlay({ mobileOpen, setMobileOpen, menuFocus, setM
         : null;
     const selectedChildren = selectedExpandable ? selectedExpandable.children : [];
     const isPlanningOpen = Boolean(activeMenu && expandedItem && selectedChildren.length);
+
+    const onSubmenuClick = (childLabel) => {
+        const normalizedMenuId = (menuFocus || '').toLowerCase();
+        const normalizedParent = (expandedItem || '').toLowerCase();
+        const normalizedChild = (childLabel || '').toLowerCase();
+
+        if (
+            normalizedMenuId === 'services' &&
+            normalizedParent === 'architectural design' &&
+            normalizedChild === 'residential'
+        ) {
+            setExpandedItem('');
+            setMenuFocus('');
+            setMobileOpen(false);
+            if (pathname !== '/services/residential') {
+                setIsRouteLoading(true);
+                router.push('/services/residential');
+            }
+            return;
+        }
+
+        if (onSubmenuItemClick) {
+            onSubmenuItemClick({
+                menuId: menuFocus,
+                parentLabel: expandedItem,
+                childLabel
+            });
+        }
+        setExpandedItem('');
+        setMenuFocus('');
+        setMobileOpen(false);
+    };
 
     const onMainNavClick = (sectionId) => {
         if (sectionId === 'about') {
@@ -143,7 +183,9 @@ export default function MenuOverlay({ mobileOpen, setMobileOpen, menuFocus, setM
                         <ul className={`menu-submenu-links ${isPlanningOpen ? 'open' : ''}`}>
                             {selectedChildren.map((child, index) => (
                                 <li key={`${expandedItem}-${child}`} style={{ '--item-delay': `${index * 0.16}s` }}>
-                                    {child}
+                                    <button type="button" className="menu-submenu-link" onClick={() => onSubmenuClick(child)}>
+                                        {child}
+                                    </button>
                                 </li>
                             ))}
                         </ul>

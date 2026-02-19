@@ -63,7 +63,9 @@ export default function Page() {
 
   useEffect(() => {
     const onEsc = (event) => {
-      if (event.key === 'Escape') setMobileOpen(false);
+      if (event.key !== 'Escape') return;
+      setMobileOpen(false);
+      setActiveProjectId('');
     };
     document.addEventListener('keydown', onEsc);
     return () => document.removeEventListener('keydown', onEsc);

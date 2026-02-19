@@ -11,11 +11,11 @@ export const MENU_CONTENT = {
     services: {
         heading: 'Services',
         items: [
-            'Architectural Design',
             {
-                label: 'Planning Applications',
+                label: 'Architectural Design',
                 children: ['Residential', 'Commercial']
             },
+            'Planning Applications',
             'Interior Design',
             'Create & Construct'
         ]
@@ -36,6 +36,55 @@ export const MENU_CONTENT = {
             '+91 9940482048',
             '+91 9940340216'
         ]
+    }
+};
+
+export const RESIDENTIAL_SERVICE_DETAIL = {
+    eyebrow: 'Architectural Design | Residential',
+    title: 'Residential Architecture',
+    intro: [
+        'At SKAPE, we believe a home is more than walls and a roof. It is a reflection of your lifestyle, aspirations, and personality. Our residential architecture is thoughtfully designed to balance aesthetics, functionality, comfort, and sustainability.',
+        'We create homes that feel timeless, elegant, and deeply personal.'
+    ],
+    approach: [
+        {
+            title: 'Understanding You',
+            text: 'Every home begins with listening. We understand your lifestyle, family needs, cultural values, and future goals before shaping the design vision.'
+        },
+        {
+            title: 'Concept to Creation',
+            text: 'From initial sketches to final execution, we deliver a seamless architectural journey, integrating form, function, materials, and light.'
+        },
+        {
+            title: 'Smart and Sustainable Design',
+            text: 'We incorporate climate-responsive architecture, natural ventilation and daylight optimization, energy-efficient planning, and sustainable materials.'
+        }
+    ],
+    offerings: [
+        {
+            title: 'Home Renovation',
+            text: 'At SKAPE, we transform existing homes into refined, functional living spaces. Our renovation approach blends modern design with structural improvement, enhancing comfort, aesthetics, and value. From facade upgrades to complete interior remodeling, we reimagine your home with thoughtful planning, quality materials, and seamless execution tailored to your lifestyle.'
+        },
+        {
+            title: 'Planning Application',
+            text: 'We provide complete assistance for planning approval and statutory submissions. Our team prepares accurate drawings, documentation, and compliance reports aligned with local building regulations. We coordinate with authorities, ensuring a smooth approval process while minimizing delays. From concept to submission, we handle every detail professionally, making your project legally compliant and ready for construction.'
+        },
+        {
+            title: 'Architecture and Interior Design',
+            text: 'We seamlessly blend architecture and interior design to create cohesive, functional, and visually striking spaces. Our holistic approach ensures that structure, layout, materials, lighting, and interiors work in harmony. From concept to completion, we design spaces that reflect your lifestyle, enhance comfort, and deliver timeless aesthetics with thoughtful detailing and efficient planning.'
+        },
+        {
+            title: 'Landscape Design',
+            text: 'We design landscapes that enhance architecture and connect spaces with nature. Our approach balances aesthetics, functionality, and sustainability, creating inviting outdoor environments that complement your home. From garden planning and hardscape design to lighting and planting concepts, we craft serene, well-structured landscapes that elevate everyday living.'
+        }
+    ],
+    heroImage: {
+        src: '/assets/residential-hero.jpg',
+        alt: 'Architectural planning desk with drawings and a laptop'
+    },
+    landscapeImage: {
+        src: '/assets/residential-landscape.jpg',
+        alt: 'Residential landscape lighting and outdoor seating'
     }
 };
 

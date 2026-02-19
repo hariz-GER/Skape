@@ -681,6 +681,24 @@ p {
   font-family: "Cinzel", serif;
 }
 
+.menu-submenu-link {
+  background: transparent;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  font-family: "Cinzel", serif;
+  letter-spacing: inherit;
+  line-height: inherit;
+  text-align: left;
+  padding: 0;
+  cursor: none;
+  transition: color var(--transition);
+}
+
+.menu-submenu-link:hover {
+  color: var(--gold);
+}
+
 .menu-submenu-links.open li {
   opacity: 1;
   transform: translateY(0);
@@ -1235,6 +1253,115 @@ p {
   text-align: center;
 }
 
+.service-detail-page {
+  padding-top: 134px;
+}
+
+.residential-header {
+  margin-bottom: 34px;
+}
+
+.residential-hero {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 26px;
+}
+
+.residential-hero img {
+  width: 100%;
+  max-height: 540px;
+  object-fit: cover;
+}
+
+.residential-copy {
+  display: grid;
+  gap: 10px;
+  max-width: 92ch;
+}
+
+.residential-block {
+  margin-top: 30px;
+}
+
+.residential-block h3 {
+  color: #fff;
+  margin-bottom: 14px;
+}
+
+.residential-approach-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.residential-approach-card,
+.residential-offering-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg-soft);
+  padding: 24px;
+}
+
+.residential-step {
+  font-family: "Cinzel", serif;
+  color: var(--gold-soft);
+  font-size: 1.4rem;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+.residential-approach-card h4,
+.residential-offering-card h4 {
+  color: #fff;
+  font-family: "Cinzel", serif;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.residential-offering-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.residential-visual-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 14px;
+}
+
+.residential-visual-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  min-height: 280px;
+  background: var(--bg-soft);
+}
+
+.residential-visual-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.residential-interior-card {
+  display: grid;
+  place-items: center;
+  background: #11141b;
+}
+
+.residential-interior-card span {
+  width: min(84%, 400px);
+  padding: clamp(20px, 4vw, 34px) 16px;
+  text-align: center;
+  border: 1px solid rgba(245, 245, 245, 0.75);
+  font-family: "Cinzel", serif;
+  letter-spacing: 0.1em;
+  font-size: clamp(1rem, 2.1vw, 1.35rem);
+  color: #fff;
+}
+
 .photo-layout {
   display: grid;
   gap: 12px;
@@ -1369,6 +1496,23 @@ p {
 
   .project-header-premium {
     margin-bottom: 44px;
+  }
+
+  .residential-header {
+    margin-bottom: 28px;
+  }
+
+  .service-detail-page {
+    padding-top: 118px;
+  }
+
+  .residential-approach-card,
+  .residential-offering-card {
+    padding: 20px;
+  }
+
+  .residential-visual-card {
+    min-height: 240px;
   }
 
   .brief-section {
@@ -1579,6 +1723,10 @@ p {
     padding: 48px 22px;
   }
 
+  .menu-submenu-link {
+    cursor: pointer;
+  }
+
   .modal-close {
     top: 18px;
     right: 18px;
@@ -1595,6 +1743,18 @@ p {
   .brief-section {
     grid-template-columns: 1fr;
     gap: 16px;
+  }
+
+  .residential-approach-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .residential-offering-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .residential-visual-grid {
+    grid-template-columns: 1fr;
   }
 
   .brief-card-premium {
@@ -1798,6 +1958,19 @@ p {
 
   .brief-card-premium {
     padding: 18px;
+  }
+
+  .service-detail-page {
+    padding-top: 92px;
+  }
+
+  .residential-approach-card,
+  .residential-offering-card {
+    padding: 16px;
+  }
+
+  .residential-visual-card {
+    min-height: 210px;
   }
 
   .brief-card-premium h3 {
