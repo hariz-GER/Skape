@@ -88,6 +88,110 @@ export const RESIDENTIAL_SERVICE_DETAIL = {
     }
 };
 
+export const WORK_PLACE_SERVICE_DETAIL = {
+    eyebrow: 'Architectural Design | Work Place',
+    title: 'Work Place Design',
+    intro: [
+        'We create inspiring workplace environments that enhance productivity, collaboration, and brand identity.',
+        'Our designs balance functionality, comfort, and aesthetics to ensure efficient space planning and thoughtful detailing. From modern offices to creative studios, we craft dynamic workspaces that reflect your vision while promoting innovation, flexibility, and a positive work culture.'
+    ],
+    approach: [
+        {
+            title: 'Productivity-First Planning',
+            text: 'Layouts are organized to support focused work, smooth movement, and better day-to-day efficiency across teams.'
+        },
+        {
+            title: 'Collaboration and Flexibility',
+            text: 'We design a mix of collaborative and quiet zones so teams can shift naturally between discussion, creation, and concentration.'
+        },
+        {
+            title: 'Brand-Led Spatial Identity',
+            text: 'Materials, colors, and spatial language are curated to reflect your brand while keeping the workplace modern, comfortable, and professional.'
+        }
+    ],
+    offerings: [
+        {
+            title: 'Corporate Offices',
+            text: 'Structured workplace environments with clear zoning, meeting areas, and employee-focused planning.'
+        },
+        {
+            title: 'Creative Studios',
+            text: 'Flexible studio layouts that support ideation, production workflows, and dynamic team collaboration.'
+        },
+        {
+            title: 'Workspace Renovation',
+            text: 'Transformation of existing office spaces with improved circulation, updated materials, and stronger visual identity.'
+        },
+        {
+            title: 'Lighting and Detailing',
+            text: 'Layered lighting and interior detailing that improve comfort, mood, and day-long workplace usability.'
+        }
+    ],
+    heroImage: {
+        src: 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1600&q=80',
+        alt: 'Modern collaborative office with glass partitions and open desks'
+    },
+    landscapeImage: {
+        src: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1400&q=80',
+        alt: 'Workplace lounge and meeting area with contemporary design'
+    },
+    approachHeading: 'Design Approach',
+    scopeHeading: 'Work Place Scope',
+    featureLabel: 'WORK PLACE INTERIORS'
+};
+
+export const HOSPITALITY_SERVICE_DETAIL = {
+    eyebrow: 'Architectural Design | Hospitality',
+    title: 'Hospitality Design',
+    intro: [
+        'We design hospitality spaces that create memorable guest experiences by blending architecture, interiors, and ambiance.',
+        'From hotels and resorts to cafes and lounges, we craft spaces that balance comfort, functionality, and visual appeal. Our thoughtful planning, material selection, and lighting concepts create inviting environments that reflect your brand identity and elevate every visitor experience.'
+    ],
+    approach: [
+        {
+            title: 'Guest Journey Planning',
+            text: 'Spaces are designed around arrival, movement, comfort, and service flow to create seamless and welcoming experiences.'
+        },
+        {
+            title: 'Atmosphere and Identity',
+            text: 'Interior character, mood, and layout are shaped to express brand personality while staying warm and intuitive for guests.'
+        },
+        {
+            title: 'Material and Lighting Harmony',
+            text: 'We combine durable materials, layered textures, and balanced lighting to deliver spaces that feel elegant, practical, and memorable.'
+        }
+    ],
+    offerings: [
+        {
+            title: 'Hotels and Resorts',
+            text: 'Guest-focused planning for lobbies, rooms, amenities, and shared spaces with a strong visual identity.'
+        },
+        {
+            title: 'Cafes and Lounges',
+            text: 'Social hospitality environments designed for comfort, atmosphere, and efficient front-of-house operations.'
+        },
+        {
+            title: 'Restaurant Interiors',
+            text: 'Dining spaces with refined zoning, seating strategy, and material palettes for an elevated experience.'
+        },
+        {
+            title: 'Lighting Concepts',
+            text: 'Feature and ambient lighting systems that enhance mood, wayfinding, and spatial depth throughout the venue.'
+        }
+    ],
+    heroImage: {
+        src: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=1600&q=80',
+        alt: 'Luxury hotel lobby with warm hospitality lighting'
+    },
+    landscapeImage: {
+        src: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1400&q=80',
+        alt: 'Hospitality lounge seating with elegant interior styling'
+    },
+    approachHeading: 'Design Approach',
+    scopeHeading: 'Hospitality Scope',
+    featureLabel: 'GUEST EXPERIENCE'
+};
+
 export const SERVICES_DATA = [
     {
         title: 'Home Renovation',

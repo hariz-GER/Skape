@@ -50,21 +50,22 @@ export default function MenuOverlay({
     const isPlanningOpen = Boolean(activeMenu && expandedItem && selectedChildren.length);
 
     const onSubmenuClick = (childLabel) => {
-        const normalizedMenuId = (menuFocus || '').toLowerCase();
-        const normalizedParent = (expandedItem || '').toLowerCase();
         const normalizedChild = (childLabel || '').toLowerCase();
+        const architecturalServiceRoutes = {
+            residential: '/services/residential',
+            commercial: '/services/commercial',
+            'work place': '/services/work-place',
+            hospitality: '/services/hospitality'
+        };
+        const targetRoute = architecturalServiceRoutes[normalizedChild];
 
-        if (
-            normalizedMenuId === 'services' &&
-            normalizedParent === 'architectural design' &&
-            normalizedChild === 'residential'
-        ) {
+        if (targetRoute) {
             setExpandedItem('');
             setMenuFocus('');
             setMobileOpen(false);
-            if (pathname !== '/services/residential') {
+            if (pathname !== targetRoute) {
                 setIsRouteLoading(true);
-                router.push('/services/residential');
+                router.push(targetRoute);
             }
             return;
         }
@@ -111,7 +112,7 @@ export default function MenuOverlay({
     return (
         <>
             {isRouteLoading && (
-                <div className="route-loading-overlay" role="status" aria-live="polite" aria-label="Loading about page">
+                <div className="route-loading-overlay" role="status" aria-live="polite" aria-label="Loading page">
                     <img src="/assets/logo.png" alt="Skape loading" className="route-loading-logo" />
                 </div>
             )}

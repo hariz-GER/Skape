@@ -22,7 +22,7 @@ export default function ResidentialServiceContent({ detail }) {
                 </div>
 
                 <section className="residential-block" data-reveal>
-                    <h3>Our Approach</h3>
+                    <h3>{detail.approachHeading || 'Our Approach'}</h3>
                     <div className="residential-approach-grid">
                         {detail.approach.map((item, index) => (
                             <article className="residential-approach-card" key={item.title}>
@@ -35,7 +35,7 @@ export default function ResidentialServiceContent({ detail }) {
                 </section>
 
                 <section className="residential-block" data-reveal>
-                    <h3>Residential Scope</h3>
+                    <h3>{detail.scopeHeading || 'Service Scope'}</h3>
                     <div className="residential-offering-grid">
                         {detail.offerings.map((item) => (
                             <article className="residential-offering-card" key={item.title}>
@@ -52,7 +52,7 @@ export default function ResidentialServiceContent({ detail }) {
                             <img src={detail.landscapeImage.src} alt={detail.landscapeImage.alt} loading="lazy" />
                         </figure>
                         <figure className="residential-visual-card residential-interior-card">
-                            <span>INTERIOR DESIGN</span>
+                            <span>{detail.featureLabel || 'INTERIOR DESIGN'}</span>
                         </figure>
                     </div>
                 </section>
