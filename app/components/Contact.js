@@ -1,6 +1,6 @@
 'use client';
 
-export default function Contact({ form, onFieldChange, onSubmit, errors, status }) {
+export default function Contact({ form, onFieldChange, onSubmit, errors, status, isSubmitting }) {
     return (
         <section className="section" id="contact">
             <div className="container split contact-split">
@@ -19,24 +19,45 @@ export default function Contact({ form, onFieldChange, onSubmit, errors, status 
                 <form className="contact-form" onSubmit={onSubmit} noValidate data-reveal>
                     <div>
                         <label htmlFor="name">Full Name</label>
-                        <input id="name" name="name" type="text" value={form.name} onChange={onFieldChange} />
+                        <input
+                            id="name"
+                            name="name"
+                            type="text"
+                            value={form.name}
+                            onChange={onFieldChange}
+                            disabled={isSubmitting}
+                        />
                         <small className="error">{errors.name || ''}</small>
                     </div>
 
                     <div>
                         <label htmlFor="email">Email</label>
-                        <input id="email" name="email" type="email" value={form.email} onChange={onFieldChange} />
+                        <input
+                            id="email"
+                            name="email"
+                            type="email"
+                            value={form.email}
+                            onChange={onFieldChange}
+                            disabled={isSubmitting}
+                        />
                         <small className="error">{errors.email || ''}</small>
                     </div>
 
                     <div>
                         <label htmlFor="message">Project Brief</label>
-                        <textarea id="message" name="message" rows="5" value={form.message} onChange={onFieldChange} />
+                        <textarea
+                            id="message"
+                            name="message"
+                            rows="5"
+                            value={form.message}
+                            onChange={onFieldChange}
+                            disabled={isSubmitting}
+                        />
                         <small className="error">{errors.message || ''}</small>
                     </div>
 
-                    <button type="submit" className="btn btn-primary btn-min">
-                        Submit Inquiry
+                    <button type="submit" className="btn btn-primary btn-min" disabled={isSubmitting}>
+                        {isSubmitting ? 'Sending...' : 'Submit Inquiry'}
                     </button>
                     <p className="form-status" aria-live="polite">
                         {status}

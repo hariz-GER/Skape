@@ -82,8 +82,10 @@ export default function ResidentialServiceContent({ detail }) {
                                             <span className="planning-timeline-number">{String(index + 1).padStart(2, '0')}</span>
                                             <span className="planning-timeline-divider" aria-hidden="true" />
                                             <div className="planning-timeline-copy">
-                                                <h4>{item.title}</h4>
-                                                <p>{item.text}</p>
+                                                <div className="planning-timeline-copy-inner">
+                                                    <h4>{item.title}</h4>
+                                                    <p>{item.text}</p>
+                                                </div>
                                             </div>
                                         </li>
                                     ))}

@@ -50,6 +50,7 @@ export default function Page() {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [hideHeader, setHideHeader] = useState(false);
   const lastScrollY = useRef(0);
@@ -136,7 +137,7 @@ export default function Page() {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
     const nextErrors = {};
 
@@ -147,10 +148,40 @@ export default function Page() {
     if (form.message.trim().length < 10) nextErrors.message = 'Please provide at least 10 characters.';
 
     setErrors(nextErrors);
-    if (Object.keys(nextErrors).length) return setStatus('');
+    if (Object.keys(nextErrors).length) {
+      setStatus('');
+      return;
+    }
 
-    setStatus('Thank you. Your inquiry has been submitted.');
-    setForm({ name: '', email: '', message: '' });
+    try {
+      setIsSubmitting(true);
+      setStatus('Saving your inquiry...');
+
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: form.name.trim(),
+          email: form.email.trim(),
+          message: form.message.trim(),
+        }),
+      });
+
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        setStatus(result.error || 'Unable to save inquiry right now. Please try again.');
+        return;
+      }
+
+      setStatus('Thank you. Your inquiry has been saved successfully.');
+      setForm({ name: '', email: '', message: '' });
+    } catch (_error) {
+      setStatus('Unable to save inquiry right now. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -183,7 +214,14 @@ export default function Page() {
           setActiveProjectId={setActiveProjectId}
         />
         {activeProject && <ProjectDetail project={activeProject} onClose={() => setActiveProjectId('')} />}
-        <Contact form={form} onFieldChange={onFieldChange} onSubmit={onSubmit} errors={errors} status={status} />
+        <Contact
+          form={form}
+          onFieldChange={onFieldChange}
+          onSubmit={onSubmit}
+          errors={errors}
+          status={status}
+          isSubmitting={isSubmitting}
+        />
       </main>
 
       <Footer />
