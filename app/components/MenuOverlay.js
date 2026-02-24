@@ -33,9 +33,14 @@ export default function MenuOverlay({
 
     useEffect(() => {
         if (!isRouteLoading) return;
-        const timeout = window.setTimeout(() => setIsRouteLoading(false), 10000);
+        const timeout = window.setTimeout(() => setIsRouteLoading(false), 2200);
         return () => window.clearTimeout(timeout);
     }, [isRouteLoading]);
+
+    useEffect(() => {
+        const routesToPrefetch = ['/', '/about', '/services/residential', '/services/commercial', '/services/work-place', '/services/hospitality'];
+        routesToPrefetch.forEach((route) => router.prefetch(route));
+    }, [router]);
 
     const selectedExpandable = activeMenu
         ? activeMenu.items.find(

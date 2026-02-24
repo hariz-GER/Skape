@@ -46,7 +46,7 @@ export default function Page() {
   const [menuFocus, setMenuFocus] = useState('');
   const [filter, setFilter] = useState('all');
   const [activeProjectId, setActiveProjectId] = useState('');
-  const [showSplash, setShowSplash] = useState(true);
+  const [showSplash, setShowSplash] = useState(false);
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState('');
@@ -57,7 +57,17 @@ export default function Page() {
   useRevealOnScroll();
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setShowSplash(false), 6000);
+    const splashSeenKey = 'skape-splash-seen';
+    const alreadySeenSplash = window.sessionStorage.getItem(splashSeenKey) === '1';
+
+    if (alreadySeenSplash) {
+      setShowSplash(false);
+      return undefined;
+    }
+
+    setShowSplash(true);
+    window.sessionStorage.setItem(splashSeenKey, '1');
+    const timer = window.setTimeout(() => setShowSplash(false), 1200);
     return () => window.clearTimeout(timer);
   }, []);
 

@@ -1,7 +1,18 @@
 'use client';
 
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+
 export default function Header({ mobileOpen, setMobileOpen, scrolled, hideHeader }) {
+    const pathname = usePathname();
     const showBrandOnly = scrolled && !mobileOpen;
+    const onBrandClick = (event) => {
+        setMobileOpen(false);
+        if (pathname === '/') {
+            event.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    };
 
     return (
         <header
@@ -10,15 +21,15 @@ export default function Header({ mobileOpen, setMobileOpen, scrolled, hideHeader
         >
             {showBrandOnly ? (
                 <div className="brand-only">
-                    <a className="brand" href="#top" aria-label="Skape home">
+                    <Link className="brand" href="/" aria-label="Skape home" onClick={onBrandClick}>
                         <img src="/assets/logo.png" alt="Skape logo" className="brand-logo" />
-                    </a>
+                    </Link>
                 </div>
             ) : (
                 <div className="container nav-wrap">
-                    <a className="brand" href="#top" aria-label="Skape home">
+                    <Link className="brand" href="/" aria-label="Skape home" onClick={onBrandClick}>
                         <img src="/assets/logo.png" alt="Skape logo" className="brand-logo" />
-                    </a>
+                    </Link>
                     <button
                         className={`menu-toggle ${mobileOpen ? 'open' : ''}`}
                         aria-expanded={mobileOpen}

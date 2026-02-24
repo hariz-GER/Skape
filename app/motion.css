@@ -101,7 +101,7 @@
 /* Page Transitions */
 .app-shell {
     opacity: 0;
-    animation: pageFadeIn 1.5s ease 1.6s forwards;
+    animation: pageFadeIn 0.55s ease-out forwards;
 }
 
 @keyframes pageFadeIn {
