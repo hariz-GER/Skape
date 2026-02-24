@@ -1,8 +1,36 @@
 'use client';
 
+import { useEffect } from 'react';
+
 export default function ResidentialServiceContent({ detail }) {
     if (!detail) return null;
     const isTimelineApproach = detail.approachLayout === 'timeline';
+
+    useEffect(() => {
+        if (!isTimelineApproach) return;
+
+        const items = document.querySelectorAll('.planning-timeline-item');
+        if (!items.length) return;
+
+        if (!('IntersectionObserver' in window)) {
+            items.forEach((item) => item.classList.add('is-open'));
+            return;
+        }
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.add('is-open');
+                    observer.unobserve(entry.target);
+                });
+            },
+            { threshold: 0.55, rootMargin: '0px 0px -18% 0px' }
+        );
+
+        items.forEach((item) => observer.observe(item));
+        return () => observer.disconnect();
+    }, [isTimelineApproach, detail.approach.length]);
 
     return (
         <section className="section service-detail-page" id="services">

@@ -1359,6 +1359,18 @@ p {
 }
 
 .planning-timeline-copy {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transform: translateY(10px);
+  padding: 0;
+  transition: max-height 0.55s ease, opacity 0.45s ease, transform 0.45s ease, padding 0.45s ease;
+}
+
+.planning-timeline-item.is-open .planning-timeline-copy {
+  max-height: 380px;
+  opacity: 1;
+  transform: translateY(0);
   padding: 2px 0 36px;
 }
 
@@ -1383,6 +1395,14 @@ p {
 
 .planning-timeline-item:last-child .planning-timeline-copy {
   padding-bottom: 0;
+}
+
+.planning-timeline-item.is-open:last-child .planning-timeline-copy {
+  padding-bottom: 0;
+}
+
+.planning-timeline-item.is-open .planning-timeline-number {
+  color: var(--gold-soft);
 }
 
 .residential-approach-grid {
@@ -2108,7 +2128,7 @@ p {
     font-size: 1.25rem;
   }
 
-  .planning-timeline-copy {
+  .planning-timeline-item.is-open .planning-timeline-copy {
     padding-bottom: 24px;
   }
 
