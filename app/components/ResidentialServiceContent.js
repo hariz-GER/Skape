@@ -1,35 +1,55 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 export default function ResidentialServiceContent({ detail }) {
     if (!detail) return null;
     const isTimelineApproach = detail.approachLayout === 'timeline';
+    const timelineRef = useRef(null);
 
     useEffect(() => {
         if (!isTimelineApproach) return;
 
-        const items = document.querySelectorAll('.planning-timeline-item');
+        const timelineNode = timelineRef.current;
+        if (!timelineNode) return;
+
+        const items = Array.from(timelineNode.querySelectorAll('.planning-timeline-item'));
         if (!items.length) return;
 
-        if (!('IntersectionObserver' in window)) {
-            items.forEach((item) => item.classList.add('is-open'));
-            return;
-        }
+        let rafId = 0;
 
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (!entry.isIntersecting) return;
-                    entry.target.classList.add('is-open');
-                    observer.unobserve(entry.target);
-                });
-            },
-            { threshold: 0.55, rootMargin: '0px 0px -18% 0px' }
-        );
+        const updateTimelineState = () => {
+            const triggerY = window.innerHeight * 0.62;
+            let activeIndex = -1;
 
-        items.forEach((item) => observer.observe(item));
-        return () => observer.disconnect();
+            items.forEach((item, index) => {
+                const rect = item.getBoundingClientRect();
+                const anchorY = rect.top + rect.height * 0.4;
+                if (anchorY <= triggerY) activeIndex = index;
+            });
+
+            items.forEach((item, index) => {
+                item.classList.toggle('is-open', index <= activeIndex);
+            });
+        };
+
+        const onScrollOrResize = () => {
+            if (rafId) return;
+            rafId = window.requestAnimationFrame(() => {
+                rafId = 0;
+                updateTimelineState();
+            });
+        };
+
+        updateTimelineState();
+        window.addEventListener('scroll', onScrollOrResize, { passive: true });
+        window.addEventListener('resize', onScrollOrResize);
+
+        return () => {
+            window.removeEventListener('scroll', onScrollOrResize);
+            window.removeEventListener('resize', onScrollOrResize);
+            if (rafId) window.cancelAnimationFrame(rafId);
+        };
     }, [isTimelineApproach, detail.approach.length]);
 
     return (
@@ -56,7 +76,7 @@ export default function ResidentialServiceContent({ detail }) {
                             <div className="planning-timeline-spacer" aria-hidden="true" />
                             <div className="planning-timeline-content">
                                 <h3>{detail.approachHeading || 'Our Approach'}</h3>
-                                <ol className="planning-timeline">
+                                <ol className="planning-timeline" ref={timelineRef}>
                                     {detail.approach.map((item, index) => (
                                         <li className="planning-timeline-item" key={item.title}>
                                             <span className="planning-timeline-number">{String(index + 1).padStart(2, '0')}</span>
