@@ -88,6 +88,64 @@ export const RESIDENTIAL_SERVICE_DETAIL = {
     }
 };
 
+export const PLANNING_APPLICATION_SERVICE_DETAIL = {
+    eyebrow: 'Planning Applications | Statutory Compliance',
+    title: 'Planning Application Services',
+    intro: [
+        'We manage the complete planning permission process with precision and clarity. From preparing detailed architectural drawings to coordinating statutory documentation and authority approvals, we ensure full compliance with local regulations. Our streamlined approach minimizes delays, making your project legally approved and ready to move forward with confidence.',
+        'We ensure every project complies with Indian building regulations and safety standards. Our designs align with the National Building Code of India, local Development Control Rules (DCR), and municipal authority guidelines.',
+        'From planning to approval, we handle documentation, zoning compliance, structural safety norms, fire safety provisions, and accessibility requirements to deliver safe, legal, and construction-ready designs with complete transparency and professional accountability.'
+    ],
+    approachHeading: 'Our Planning Application Service',
+    approachLayout: 'timeline',
+    approach: [
+        {
+            title: 'Consultation & Site Analysis',
+            text: 'We begin by understanding your project requirements, site conditions, and local authority regulations to establish a clear approval strategy.'
+        },
+        {
+            title: 'Design & Documentation',
+            text: 'Our team prepares detailed architectural drawings, site plans, and statutory documents in compliance with local building rules.'
+        },
+        {
+            title: 'Submission & Coordination',
+            text: 'We submit the planning application and coordinate with authorities, addressing queries and ensuring smooth communication.'
+        },
+        {
+            title: 'Approval & Compliance Support',
+            text: 'We assist until final approval is secured, ensuring your project is legally compliant and ready for execution.'
+        }
+    ],
+    scopeHeading: 'Regulatory Coverage',
+    offerings: [
+        {
+            title: 'Authority Documentation',
+            text: 'Preparation of statutory drawings, applications, declarations, and submission-ready documents for local body approvals.'
+        },
+        {
+            title: 'Zoning and DCR Compliance',
+            text: 'Checks for setbacks, land-use controls, permissible FSI/FAR, and development norms based on applicable local regulations.'
+        },
+        {
+            title: 'Safety and Structural Norms',
+            text: 'Design coordination for structural safety provisions, fire-safety requirements, and mandatory code-aligned planning controls.'
+        },
+        {
+            title: 'Accessibility and Final Clearances',
+            text: 'Integration of accessibility standards and end-to-end support through authority clarifications, revisions, and approval closure.'
+        }
+    ],
+    heroImage: {
+        src: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1600&q=80',
+        alt: 'Architectural planning desk with drawings and tablet'
+    },
+    landscapeImage: {
+        src: 'https://images.unsplash.com/photo-1485081669829-bacb8c7bb1f3?auto=format&fit=crop&w=1400&q=80',
+        alt: 'Construction site with tower crane silhouette'
+    },
+    featureLabel: 'PLANNING PERMISSION'
+};
+
 export const WORK_PLACE_SERVICE_DETAIL = {
     eyebrow: 'Architectural Design | Work Place',
     title: 'Work Place Design',
@@ -205,7 +263,7 @@ export const SERVICES_DATA = [
             'We offer a seamless home renovation experience that transforms outdated spaces into functional, modern, and beautifully refined environments. Our process begins with understanding each client\'s needs, lifestyle, and vision, ensuring that every design decision reflects their goals. From structural improvements to aesthetic upgrades, we manage every detail with precision, transparency, and care.'
     },
     {
-        title: 'Planning Application',
+        title: 'Planning Applications',
         icon: (
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M12 2v20M2 12h20M2 2l20 20M2 22L22 2" />

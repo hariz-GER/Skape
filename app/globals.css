@@ -608,6 +608,21 @@ p {
   transition: color var(--transition);
 }
 
+.menu-service-link {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+  font: inherit;
+  font-family: "Cinzel", serif;
+  letter-spacing: inherit;
+  line-height: inherit;
+  text-align: left;
+  cursor: none;
+  transition: color var(--transition);
+}
+
 .menu-overlay-inner.has-submenu .menu-service-trigger {
   white-space: nowrap;
 }
@@ -617,7 +632,8 @@ p {
 }
 
 .menu-service-trigger:hover,
-.menu-service-trigger.open {
+.menu-service-trigger.open,
+.menu-service-link:hover {
   color: var(--gold);
 }
 
@@ -814,6 +830,15 @@ p {
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+
+.service-card-link {
+  outline: none;
+}
+
+.service-card-link:focus-visible {
+  border-color: var(--gold);
+  box-shadow: var(--shadow-lg), 0 0 0 2px rgba(212, 175, 55, 0.35);
 }
 
 .service-card:hover {
@@ -1289,6 +1314,77 @@ p {
   margin-bottom: 14px;
 }
 
+.planning-timeline-block {
+  margin-top: 42px;
+}
+
+.planning-timeline-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 620px);
+  gap: clamp(24px, 5vw, 80px);
+}
+
+.planning-timeline-content h3 {
+  font-family: "Manrope", sans-serif;
+  font-weight: 400;
+  font-size: clamp(2rem, 3.2vw, 3.2rem);
+  margin-bottom: 26px;
+}
+
+.planning-timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.planning-timeline-item {
+  display: grid;
+  grid-template-columns: 58px 1px minmax(0, 1fr);
+  column-gap: 24px;
+  align-items: flex-start;
+}
+
+.planning-timeline-number {
+  color: rgba(230, 230, 230, 0.44);
+  font-size: 1.9rem;
+  line-height: 1;
+  font-family: "Cinzel", serif;
+  padding-top: 2px;
+}
+
+.planning-timeline-divider {
+  width: 1px;
+  align-self: stretch;
+  background: rgba(238, 238, 238, 0.2);
+}
+
+.planning-timeline-copy {
+  padding: 2px 0 36px;
+}
+
+.planning-timeline-copy h4 {
+  color: #fff;
+  font-family: "Manrope", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+  margin-bottom: 14px;
+}
+
+.planning-timeline-copy p {
+  color: rgba(231, 235, 241, 0.72);
+  font-size: clamp(1rem, 1.35vw, 1.25rem);
+  line-height: 1.75;
+}
+
+.planning-timeline-item:last-child .planning-timeline-divider {
+  opacity: 0.3;
+}
+
+.planning-timeline-item:last-child .planning-timeline-copy {
+  padding-bottom: 0;
+}
+
 .residential-approach-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1549,6 +1645,10 @@ p {
     display: none;
   }
 
+  .service-card-link {
+    cursor: pointer;
+  }
+
   .service-grid,
   .project-grid,
   .detail-grid,
@@ -1727,6 +1827,10 @@ p {
     cursor: pointer;
   }
 
+  .menu-service-link {
+    cursor: pointer;
+  }
+
   .modal-close {
     top: 18px;
     right: 18px;
@@ -1747,6 +1851,28 @@ p {
 
   .residential-approach-grid {
     grid-template-columns: 1fr;
+  }
+
+  .planning-timeline-shell {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .planning-timeline-spacer {
+    display: none;
+  }
+
+  .planning-timeline-content h3 {
+    font-size: clamp(1.8rem, 6vw, 2.4rem);
+  }
+
+  .planning-timeline-item {
+    grid-template-columns: 50px 1px minmax(0, 1fr);
+    column-gap: 16px;
+  }
+
+  .planning-timeline-number {
+    font-size: 1.55rem;
   }
 
   .residential-offering-grid {
@@ -1967,6 +2093,33 @@ p {
   .residential-approach-card,
   .residential-offering-card {
     padding: 16px;
+  }
+
+  .planning-timeline-content h3 {
+    margin-bottom: 20px;
+  }
+
+  .planning-timeline-item {
+    grid-template-columns: 42px 1px minmax(0, 1fr);
+    column-gap: 12px;
+  }
+
+  .planning-timeline-number {
+    font-size: 1.25rem;
+  }
+
+  .planning-timeline-copy {
+    padding-bottom: 24px;
+  }
+
+  .planning-timeline-copy h4 {
+    font-size: 0.98rem;
+    margin-bottom: 10px;
+  }
+
+  .planning-timeline-copy p {
+    font-size: 0.94rem;
+    line-height: 1.65;
   }
 
   .residential-visual-card {

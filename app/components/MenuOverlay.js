@@ -38,7 +38,15 @@ export default function MenuOverlay({
     }, [isRouteLoading]);
 
     useEffect(() => {
-        const routesToPrefetch = ['/', '/about', '/services/residential', '/services/commercial', '/services/work-place', '/services/hospitality'];
+        const routesToPrefetch = [
+            '/',
+            '/about',
+            '/services/residential',
+            '/services/commercial',
+            '/services/work-place',
+            '/services/hospitality',
+            '/services/planning-applications'
+        ];
         routesToPrefetch.forEach((route) => router.prefetch(route));
     }, [router]);
 
@@ -53,6 +61,15 @@ export default function MenuOverlay({
         : null;
     const selectedChildren = selectedExpandable ? selectedExpandable.children : [];
     const isPlanningOpen = Boolean(activeMenu && expandedItem && selectedChildren.length);
+
+    const serviceLeafRoutes = {
+        'planning applications': '/services/planning-applications'
+    };
+
+    const resolveLeafRoute = (menuId, itemLabel) => {
+        if (menuId !== 'services') return '';
+        return serviceLeafRoutes[(itemLabel || '').toLowerCase()] || '';
+    };
 
     const onSubmenuClick = (childLabel) => {
         const normalizedChild = (childLabel || '').toLowerCase();
@@ -80,6 +97,32 @@ export default function MenuOverlay({
                 menuId: menuFocus,
                 parentLabel: expandedItem,
                 childLabel
+            });
+        }
+        setExpandedItem('');
+        setMenuFocus('');
+        setMobileOpen(false);
+    };
+
+    const onLeafMenuItemClick = (itemLabel) => {
+        const targetRoute = resolveLeafRoute(menuFocus, itemLabel);
+
+        if (targetRoute) {
+            setExpandedItem('');
+            setMenuFocus('');
+            setMobileOpen(false);
+            if (pathname !== targetRoute) {
+                setIsRouteLoading(true);
+                router.push(targetRoute);
+            }
+            return;
+        }
+
+        if (onSubmenuItemClick) {
+            onSubmenuItemClick({
+                menuId: menuFocus,
+                parentLabel: '',
+                childLabel: itemLabel
             });
         }
         setExpandedItem('');
@@ -162,6 +205,7 @@ export default function MenuOverlay({
                                 const children = typeof item === 'object' ? item.children || [] : [];
                                 const isExpandable = children.length > 0;
                                 const isOpen = expandedItem === label;
+                                const leafRoute = resolveLeafRoute(menuFocus, label);
 
                                 return (
                                     <li key={`${label}-${index}`} style={{ '--item-delay': `${index * 0.14}s` }}>
@@ -171,6 +215,14 @@ export default function MenuOverlay({
                                                 className={`menu-service-trigger ${isOpen ? 'open' : ''}`}
                                                 onClick={() => setExpandedItem((prev) => (prev === label ? '' : label))}
                                                 aria-expanded={isOpen}
+                                            >
+                                                {label}
+                                            </button>
+                                        ) : leafRoute ? (
+                                            <button
+                                                type="button"
+                                                className="menu-service-link"
+                                                onClick={() => onLeafMenuItemClick(label)}
                                             >
                                                 {label}
                                             </button>

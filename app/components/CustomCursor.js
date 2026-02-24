@@ -29,8 +29,10 @@ export default function CustomCursor() {
             requestAnimationFrame(tick);
         };
 
+        const interactiveSelector = 'a, button, .project-card, .service-card-link';
+
         document.addEventListener('mousemove', onMove);
-        document.querySelectorAll('a, button, .project-card').forEach((el) => {
+        document.querySelectorAll(interactiveSelector).forEach((el) => {
             el.addEventListener('mouseenter', onEnterInteractive);
             el.addEventListener('mouseleave', onLeaveInteractive);
         });
@@ -38,7 +40,7 @@ export default function CustomCursor() {
 
         return () => {
             document.removeEventListener('mousemove', onMove);
-            document.querySelectorAll('a, button, .project-card').forEach((el) => {
+            document.querySelectorAll(interactiveSelector).forEach((el) => {
                 el.removeEventListener('mouseenter', onEnterInteractive);
                 el.removeEventListener('mouseleave', onLeaveInteractive);
             });

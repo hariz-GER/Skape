@@ -2,6 +2,7 @@
 
 export default function ResidentialServiceContent({ detail }) {
     if (!detail) return null;
+    const isTimelineApproach = detail.approachLayout === 'timeline';
 
     return (
         <section className="section service-detail-page" id="services">
@@ -21,18 +22,41 @@ export default function ResidentialServiceContent({ detail }) {
                     ))}
                 </div>
 
-                <section className="residential-block" data-reveal>
-                    <h3>{detail.approachHeading || 'Our Approach'}</h3>
-                    <div className="residential-approach-grid">
-                        {detail.approach.map((item, index) => (
-                            <article className="residential-approach-card" key={item.title}>
-                                <p className="residential-step">{index + 1}</p>
-                                <h4>{item.title}</h4>
-                                <p>{item.text}</p>
-                            </article>
-                        ))}
-                    </div>
-                </section>
+                {isTimelineApproach ? (
+                    <section className="residential-block planning-timeline-block" data-reveal>
+                        <div className="planning-timeline-shell">
+                            <div className="planning-timeline-spacer" aria-hidden="true" />
+                            <div className="planning-timeline-content">
+                                <h3>{detail.approachHeading || 'Our Approach'}</h3>
+                                <ol className="planning-timeline">
+                                    {detail.approach.map((item, index) => (
+                                        <li className="planning-timeline-item" key={item.title}>
+                                            <span className="planning-timeline-number">{String(index + 1).padStart(2, '0')}</span>
+                                            <span className="planning-timeline-divider" aria-hidden="true" />
+                                            <div className="planning-timeline-copy">
+                                                <h4>{item.title}</h4>
+                                                <p>{item.text}</p>
+                                            </div>
+                                        </li>
+                                    ))}
+                                </ol>
+                            </div>
+                        </div>
+                    </section>
+                ) : (
+                    <section className="residential-block" data-reveal>
+                        <h3>{detail.approachHeading || 'Our Approach'}</h3>
+                        <div className="residential-approach-grid">
+                            {detail.approach.map((item, index) => (
+                                <article className="residential-approach-card" key={item.title}>
+                                    <p className="residential-step">{index + 1}</p>
+                                    <h4>{item.title}</h4>
+                                    <p>{item.text}</p>
+                                </article>
+                            ))}
+                        </div>
+                    </section>
+                )}
 
                 <section className="residential-block" data-reveal>
                     <h3>{detail.scopeHeading || 'Service Scope'}</h3>
