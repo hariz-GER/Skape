@@ -45,7 +45,10 @@ export default function MenuOverlay({
             '/services/commercial',
             '/services/work-place',
             '/services/hospitality',
-            '/services/planning-applications'
+            '/services/planning-applications',
+            '/services/interior-design',
+            '/services/interior-design/residential',
+            '/services/interior-design/commercial'
         ];
         routesToPrefetch.forEach((route) => router.prefetch(route));
     }, [router]);
@@ -66,20 +69,31 @@ export default function MenuOverlay({
         'planning applications': '/services/planning-applications'
     };
 
+    const serviceSubmenuRoutes = {
+        'architectural design': {
+            residential: '/services/residential',
+            commercial: '/services/commercial',
+            'work place': '/services/work-place',
+            hospitality: '/services/hospitality'
+        },
+        'interior design': {
+            residential: '/services/interior-design/residential',
+            commercial: '/services/interior-design/commercial'
+        }
+    };
+
     const resolveLeafRoute = (menuId, itemLabel) => {
         if (menuId !== 'services') return '';
         return serviceLeafRoutes[(itemLabel || '').toLowerCase()] || '';
     };
 
     const onSubmenuClick = (childLabel) => {
+        const normalizedParent = (expandedItem || '').toLowerCase();
         const normalizedChild = (childLabel || '').toLowerCase();
-        const architecturalServiceRoutes = {
-            residential: '/services/residential',
-            commercial: '/services/commercial',
-            'work place': '/services/work-place',
-            hospitality: '/services/hospitality'
-        };
-        const targetRoute = architecturalServiceRoutes[normalizedChild];
+        const targetRoute =
+            menuFocus === 'services' && serviceSubmenuRoutes[normalizedParent]
+                ? serviceSubmenuRoutes[normalizedParent][normalizedChild]
+                : '';
 
         if (targetRoute) {
             setExpandedItem('');

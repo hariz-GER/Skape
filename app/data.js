@@ -16,7 +16,10 @@ export const MENU_CONTENT = {
                 children: ['Residential', 'Commercial']
             },
             'Planning Applications',
-            'Interior Design',
+            {
+                label: 'Interior Design',
+                children: ['Residential', 'Commercial']
+            },
             'Create & Construct'
         ]
     },
@@ -248,6 +251,102 @@ export const HOSPITALITY_SERVICE_DETAIL = {
     approachHeading: 'Design Approach',
     scopeHeading: 'Hospitality Scope',
     featureLabel: 'GUEST EXPERIENCE'
+};
+
+export const INTERIOR_DESIGN_SERVICE_DETAIL = {
+    eyebrow: 'Interior Design | Residential',
+    title: 'Residential Interior Design',
+    intro: [
+        'At SKAPE, we craft residential interiors that reflect your personality and elevate everyday living. Our designs combine functionality, aesthetics, and comfort, ensuring every space is thoughtfully planned and beautifully detailed.',
+        'From space planning and material selection to lighting and custom furnishings, we create harmonious interiors that are modern, timeless, and tailored to your lifestyle.'
+    ],
+    approach: [
+        {
+            title: 'Homes and Apartments',
+            text: 'We design homes and apartments that blend comfort, functionality, and modern aesthetics. Whether it is an independent house or a contemporary apartment, our approach focuses on smart space planning, natural light, ventilation, and refined detailing. We create personalized living environments that reflect your lifestyle while maximizing efficiency, elegance, and long-term value.'
+        },
+        {
+            title: 'Housing Interiors',
+            text: 'At SKAPE, we design housing interiors that combine practicality, comfort, and refined aesthetics. Our approach focuses on efficient space utilization, seamless layouts, and cohesive material palettes to create harmonious living environments. From compact units to premium residences, we craft interiors that enhance functionality while delivering timeless design and everyday comfort tailored to your lifestyle.'
+        },
+        {
+            title: 'Bespoke Joinery',
+            text: 'We create bespoke joinery solutions tailored to your space and lifestyle. From custom wardrobes and kitchens to feature panels and storage units, every element is precisely designed and crafted with premium materials. Our focus on detailing, functionality, and seamless integration ensures elegant, durable, and space-efficient solutions that enhance your interiors.'
+        }
+    ],
+    offerings: [
+        {
+            title: 'Furniture, Fixture and Equipment (FF&E)',
+            text: 'At SKAPE, we curate and specify high-quality furniture, fixtures, and equipment that enhance both function and aesthetics. Our FF&E services ensure every element, from loose furniture to lighting and accessories, aligns with the overall design vision. We focus on durability, comfort, and cohesive styling, delivering well-coordinated spaces that are practical, elegant, and ready for use.'
+        },
+        {
+            title: 'Residential Interior Design and Architecture',
+            text: 'We integrate architecture and interior design to create cohesive, thoughtfully crafted homes. Our approach ensures that spatial planning, structure, materials, lighting, and interiors work seamlessly together. From concept development to final detailing, we design residences that balance functionality, comfort, and timeless aesthetics, delivering personalized spaces that reflect your lifestyle and elevate everyday living.'
+        }
+    ],
+    heroImage: {
+        src: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=1600&q=80',
+        alt: 'Modern residential interior with contemporary furniture and warm lighting'
+    },
+    landscapeImage: {
+        src: 'https://images.unsplash.com/photo-1612528443702-f6741f70a049?auto=format&fit=crop&w=1400&q=80',
+        alt: 'Luxury living room interior with elegant design elements'
+    },
+    approachHeading: 'Design Services',
+    scopeHeading: 'Interior Design Scope',
+    featureLabel: 'RESIDENTIAL INTERIORS'
+};
+
+export const INTERIOR_COMMERCIAL_SERVICE_DETAIL = {
+    eyebrow: 'Interior Design | Commercial',
+    title: 'Commercial Interior Design',
+    intro: [
+        'At SKAPE, we design commercial interiors that align brand identity with day-to-day functionality. Our spaces are planned to improve user experience, support operations, and create a strong visual impact.',
+        'From concept development and layout strategy to lighting, finishes, and FF&E, we deliver commercial interiors that are efficient, durable, and memorable.'
+    ],
+    approach: [
+        {
+            title: 'Workplaces and Offices',
+            text: 'We create office interiors that support productivity, collaboration, and comfort through clear zoning, ergonomic planning, and balanced spatial flow.'
+        },
+        {
+            title: 'Retail and Experience Spaces',
+            text: 'Our retail interiors are shaped around customer journey, display strategy, and brand expression to create engaging spaces that improve interaction and sales performance.'
+        },
+        {
+            title: 'Hospitality and Public Interiors',
+            text: 'We design hospitality and public-facing environments with strong ambience, intuitive circulation, and durable materials to deliver welcoming and high-performing spaces.'
+        }
+    ],
+    offerings: [
+        {
+            title: 'Space Planning and Zoning',
+            text: 'Functional layouts for reception, circulation, work, display, and service zones to ensure smooth movement and operational efficiency.'
+        },
+        {
+            title: 'Materials and Detailing',
+            text: 'Carefully selected finishes, textures, and detailing systems that reinforce brand character while meeting durability and maintenance requirements.'
+        },
+        {
+            title: 'Furniture, Fixtures and Equipment (FF&E)',
+            text: 'Curated furniture and fixture specifications tailored to project use, comfort, performance, and long-term value.'
+        },
+        {
+            title: 'Lighting and Coordination',
+            text: 'Layered ambient, task, and feature lighting coordinated with MEP requirements to improve visual comfort and spatial quality.'
+        }
+    ],
+    heroImage: {
+        src: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1600&q=80',
+        alt: 'Contemporary commercial interior with lounge seating'
+    },
+    landscapeImage: {
+        src: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1400&q=80',
+        alt: 'Modern office collaboration area with warm finishes'
+    },
+    approachHeading: 'Design Services',
+    scopeHeading: 'Commercial Interior Scope',
+    featureLabel: 'COMMERCIAL INTERIORS'
 };
 
 export const SERVICES_DATA = [
