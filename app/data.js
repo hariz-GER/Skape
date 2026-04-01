@@ -149,6 +149,58 @@ export const PLANNING_APPLICATION_SERVICE_DETAIL = {
     featureLabel: 'PLANNING PERMISSION'
 };
 
+export const CREATE_CONSTRUCT_SERVICE_DETAIL = {
+    eyebrow: 'Create & Construct | End-to-End Delivery',
+    title: 'Create and Construct',
+    intro: [
+        'At SKAPE, we offer a seamless create-and-construct approach that transforms ideas into built reality. From initial concept design and detailed drawings to on-site execution and final finishes, we manage every stage with precision and accountability.',
+        'Our integrated process ensures design integrity, quality craftsmanship, cost efficiency, and timely delivery. By coordinating architects, engineers, and contractors under one vision, we create thoughtfully designed spaces that are functional, durable, and aesthetically refined.'
+    ],
+    approachHeading: 'Core Services',
+    approach: [
+        {
+            title: 'Architectural and Design Services',
+            text: 'We provide comprehensive architecture and design services that transform concepts into inspiring built environments. Our expertise spans residential, commercial, and mixed-use projects, combining innovative design thinking with practical planning. From site analysis and conceptual development to detailed drawings and material selection, we ensure every element aligns with your vision. With a focus on functionality, sustainability, and refined aesthetics, we deliver thoughtfully crafted spaces that stand the test of time.'
+        },
+        {
+            title: 'Construct | Construction',
+            text: 'Our construct and construction services focus on delivering high-quality, durable, and precisely executed spaces. We manage the entire construction process, from structural works to final finishes, with strict quality control and on-site supervision. Our team ensures adherence to timelines, budget efficiency, and design accuracy. By combining skilled craftsmanship with careful coordination, we transform approved designs into strong, refined, and long-lasting built environments.'
+        },
+        {
+            title: 'Construct | Project Management',
+            text: 'Our project management process drives clear coordination, disciplined scheduling, and transparent execution from start to handover. We align consultants, contractors, procurement, and site teams under a single roadmap to control quality, costs, and milestones. Through proactive reporting, risk tracking, and decision support, we keep delivery predictable, efficient, and faithful to the approved design intent.'
+        }
+    ],
+    scopeHeading: 'Execution Scope',
+    offerings: [
+        {
+            title: 'Integrated Design to Build',
+            text: 'A unified workflow that connects concept design, technical documentation, approvals, and construction into one coordinated process.'
+        },
+        {
+            title: 'On-Site Quality and Supervision',
+            text: 'Continuous site monitoring, workmanship checks, and material verification to maintain quality standards and build precision.'
+        },
+        {
+            title: 'Timeline and Budget Control',
+            text: 'Structured scheduling, milestone tracking, and cost monitoring to reduce delays, prevent overruns, and improve delivery certainty.'
+        },
+        {
+            title: 'Handover and Final Finishes',
+            text: 'Final detailing, snag rectification, and close-out coordination to deliver spaces that are complete, refined, and ready for use.'
+        }
+    ],
+    heroImage: {
+        src: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1600&q=80',
+        alt: 'Architect and engineer reviewing drawings at an active construction site'
+    },
+    landscapeImage: {
+        src: 'https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1400&q=80',
+        alt: 'Construction team coordination on site with structural framework'
+    },
+    featureLabel: 'CREATE AND CONSTRUCT'
+};
+
 export const WORK_PLACE_SERVICE_DETAIL = {
     eyebrow: 'Architectural Design | Work Place',
     title: 'Work Place Design',

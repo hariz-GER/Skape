@@ -46,6 +46,7 @@ export default function MenuOverlay({
             '/services/work-place',
             '/services/hospitality',
             '/services/planning-applications',
+            '/services/create-construct',
             '/services/interior-design',
             '/services/interior-design/residential',
             '/services/interior-design/commercial'
@@ -66,7 +67,8 @@ export default function MenuOverlay({
     const isPlanningOpen = Boolean(activeMenu && expandedItem && selectedChildren.length);
 
     const serviceLeafRoutes = {
-        'planning applications': '/services/planning-applications'
+        'planning applications': '/services/planning-applications',
+        'create & construct': '/services/create-construct'
     };
 
     const serviceSubmenuRoutes = {
