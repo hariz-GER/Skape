@@ -2,6 +2,13 @@
 
 export default function ProjectDetail({ project, onClose }) {
     if (!project) return null;
+    const detailSections =
+        Array.isArray(project.detailSections) && project.detailSections.length
+            ? project.detailSections
+            : [
+                  { title: 'Design Brief', content: [project.designBrief] },
+                  { title: 'Interior Design', content: [project.interiorDesign] }
+              ].filter((section) => section.content[0]);
 
     return (
         <div className="project-modal" id="project-view">
@@ -21,14 +28,18 @@ export default function ProjectDetail({ project, onClose }) {
 
                 <div className="container detail-grid-premium">
                     <div className="brief-section" data-reveal>
-                        <div className="brief-card-premium">
-                            <h3>Design Brief</h3>
-                            <p>{project.designBrief}</p>
-                        </div>
-                        <div className="brief-card-premium">
-                            <h3>Interior Design</h3>
-                            <p>{project.interiorDesign}</p>
-                        </div>
+                        {detailSections.map((section) => {
+                            const paragraphs = Array.isArray(section.content) ? section.content : [section.content];
+
+                            return (
+                                <article className="brief-card-premium" key={`${project.id}-${section.title}`}>
+                                    <h3>{section.title}</h3>
+                                    {paragraphs.filter(Boolean).map((paragraph, index) => (
+                                        <p key={`${project.id}-${section.title}-${index}`}>{paragraph}</p>
+                                    ))}
+                                </article>
+                            );
+                        })}
                     </div>
 
                     <div className="photo-gallery-premium" data-reveal>

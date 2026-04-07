@@ -440,44 +440,109 @@ export const SERVICES_DATA = [
 
 export const PROJECTS_DATA = [
     {
-        id: 'heritage-richmond',
+        id: 'mr-antony-residence',
         segment: 'residential',
-        banner: 'RESIDENTIAL | HERITAGE REBUILD',
-        title: 'Heritage Rebuild, Richmond',
-        subtitle: 'Victorian terrace restoration with full rebuild, basement, and loft expansion.',
-        cover: 'https://minaleandmann.com/wp-content/uploads/2018/01/2-8.jpg',
+        banner: 'RESIDENTIAL | MODERN TROPICAL CONTEMPORARY',
+        title: 'Mr. Antony Residence',
+        subtitle: 'Refined, climate-responsive home interiors balancing elegance, comfort, and long-term durability.',
+        cover: 'https://images.unsplash.com/photo-1617104551722-3b2d51366400?auto=format&fit=crop&w=1400&q=80',
         gallery: [
-            'https://minaleandmann.com/wp-content/uploads/2018/01/2-8.jpg',
-            'https://minaleandmann.com/wp-content/uploads/2018/01/3-7.jpg',
-            'https://minaleandmann.com/wp-content/uploads/2018/01/4-7.jpg',
-            'https://minaleandmann.com/wp-content/uploads/2018/01/5-5.jpg',
-            'https://minaleandmann.com/wp-content/uploads/2018/01/6-3.jpg'
+            'https://images.unsplash.com/photo-1617104551722-3b2d51366400?auto=format&fit=crop&w=1400&q=80',
+            'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1400&q=80',
+            'https://images.unsplash.com/photo-1616046229478-9901c5536a45?auto=format&fit=crop&w=1400&q=80',
+            'https://images.unsplash.com/photo-1616594039964-3d7f9f4f89ad?auto=format&fit=crop&w=1400&q=80',
+            'https://images.unsplash.com/photo-1617325247661-675ab4b64f11?auto=format&fit=crop&w=1400&q=80'
+        ],
+        detailSections: [
+            {
+                title: 'Project Overview',
+                content: [
+                    'This residential interior project for Mr. Antony in Chennai is designed to create a refined, comfortable, and climate-responsive home. The design intent is to reflect the client’s lifestyle while preserving functionality, durability, and long-term value.'
+                ]
+            },
+            {
+                title: 'Architecture',
+                content: [
+                    'The overall direction follows a modern tropical contemporary language: clean lines, warm materiality, and climate-aware planning aligned to Chennai conditions. The result is an elegant yet practical environment with strong visual clarity.'
+                ]
+            },
+            {
+                title: 'Interior Design Concept',
+                content: [
+                    'The dining and transition zones are developed in a modern-classic expression with deep moody tones, rich wood textures, and controlled detailing. A sculpted arched wooden partition acts as both divider and statement feature, adding rhythm and architectural identity.',
+                    'Dark olive-grey paneled walls, marble dining surfaces, upholstered seating, brushed gold accents, and layered lighting combine to produce a warm, intimate, and timeless atmosphere suited for both everyday living and gatherings.'
+                ]
+            },
+            {
+                title: 'Design Details',
+                content: [
+                    'Spaces are composed through structured vertical elements, subtle panel articulation, and softened curves. Each room transitions seamlessly into the next to maintain continuity, depth, and a cohesive premium finish across the home.'
+                ]
+            }
         ],
         designBrief:
-            'Victorian terrace in Richmond restored by retaining the heritage façade, adding a full subterranean basement and maximizing family living space with an open rear plan while keeping intimate rooms at the front and upper levels.',
+            'Residential project in Chennai designed as a refined, climate-responsive home with timeless elegance and practical everyday comfort.',
         interiorDesign:
-            'Dark wood panelling, hand-sawn French chevron flooring, reclaimed Italian marble, and a MannMade London kitchen with matt lacquer fronts and marble-topped oak island. Every floor was reconfigured for a contemporary layout and a simple landscape links the indoor and outdoor spaces.'
+            'Modern tropical contemporary interiors with deep green tones, walnut textures, marble surfaces, subtle molding, and layered warm lighting.'
     },
     {
-        id: 'mythiri',
+        id: 'mr-sampath-residence',
         segment: 'residential',
-        banner: 'RESIDENTIAL | INTERIOR DESIGN',
-        title: 'Ms. Mythiri',
+        banner: 'RESIDENTIAL | SOFT LINEAR MINIMALISM',
+        title: 'Mr. Sampath Residence',
         subtitle:
-            'For Mythiri, we designed interiors that unite style, comfort, and practicality, creating a home that feels inviting, modern, and uniquely personal.',
+            'A modern minimal residence where clean geometry, gentle curves, and warm textures create calm sophistication.',
         cover:
-            'https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=1400&q=80',
+            'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=80',
         gallery: [
-            'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1400&q=80',
-            'https://images.unsplash.com/photo-1616486029423-aaa4789e8c9a?auto=format&fit=crop&w=1400&q=80',
-            'https://images.unsplash.com/photo-1600210492486-724fe5c67fb3?auto=format&fit=crop&w=1400&q=80',
-            'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1400&q=80',
-            'https://images.unsplash.com/photo-1600210492493-0946911123ea?auto=format&fit=crop&w=1400&q=80'
+            'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=80',
+            'https://images.unsplash.com/photo-1617098907768-79e4c90f9b2a?auto=format&fit=crop&w=1400&q=80',
+            'https://images.unsplash.com/photo-1616137466211-f939a420be84?auto=format&fit=crop&w=1400&q=80',
+            'https://images.unsplash.com/photo-1617104678098-de229db51175?auto=format&fit=crop&w=1400&q=80',
+            'https://images.unsplash.com/photo-1612320648993-61c1cd604b71?auto=format&fit=crop&w=1400&q=80'
+        ],
+        detailSections: [
+            {
+                title: 'Project Overview',
+                content: [
+                    'This living environment is conceived in a modern minimal aesthetic using clean geometry, vertical detailing, and soft neutrals. The goal is to maximize perceived spaciousness while preserving warmth, usability, and comfort within a compact footprint.'
+                ]
+            },
+            {
+                title: 'Design Concept',
+                content: [
+                    'The concept, soft linear minimalism, combines slatted vertical rhythms, curved wall gestures, and restrained panel detailing. Straight lines are balanced with gentle curves to create visual harmony and architectural depth without clutter.'
+                ]
+            },
+            {
+                title: 'Architecture',
+                content: [
+                    'The architecture follows a contemporary tropical approach with open planning, smooth circulation, and climate-aware daylight use. Double-height moments, floating stair elements, and integrated storage improve both spatial flow and functionality.'
+                ]
+            },
+            {
+                title: 'Interior Design',
+                content: [
+                    'A calm neutral palette is layered with warm wood finishes, fluted surfaces, and soft ambient lighting. Each zone is designed to blend elegance with comfort, delivering timeless, personalized residential interiors.'
+                ]
+            },
+            {
+                title: 'Design Details',
+                content: [
+                    'Precision detailing is carried through concealed lighting, patterned wall treatments, vertical fluting, and curated display niches. These details introduce texture and rhythm while preserving the minimalist design language.'
+                ]
+            },
+            {
+                title: 'Furniture Details',
+                content: [
+                    'Furniture selection emphasizes clean silhouettes, ergonomic comfort, and material continuity. Custom storage, floating consoles, upholstered beds, and refined dining elements integrate seamlessly with the architecture for a cohesive premium result.'
+                ]
+            }
         ],
         designBrief:
-            'The interior design for Mythiri in Chennai was envisioned as a harmonious blend of modern comfort and subtle elegance, tailored to the lifestyle and preferences of the client. The brief focused on creating warm, functional spaces with clean lines, natural textures, and a soothing color palette that reflects both contemporary taste and regional sensibilities. The design needed to balance openness with privacy, ensuring smooth circulation and practical use of every area. Special attention was given to lighting, storage planning, and spatial organization to enhance everyday living. The goal was to build a home that feels inviting, efficient, and uniquely personal.',
+            'A modern minimal residential project focused on spatial clarity, gentle geometry, and practical elegance for compact living.',
         interiorDesign:
-            'The interiors combine calm materials, warm textures, and clean detailing to create a relaxed everyday atmosphere. The spatial planning supports both privacy and interaction, while layered lighting, soft finishes, and purposeful storage make each zone practical and elegant.'
+            'Soft neutral interiors with fluted textures, curved motifs, warm wood finishes, and integrated bespoke furniture for a timeless feel.'
     },
     {
         id: 'leisure-hall',
