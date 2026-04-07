@@ -185,6 +185,37 @@ p {
   align-items: center;
 }
 
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.quick-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.quick-nav-btn {
+  border: 1px solid var(--line);
+  background: rgba(15, 20, 26, 0.86);
+  color: var(--text);
+  padding: 8px 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.68rem;
+  border-radius: 2px;
+  cursor: none;
+  transition: background 0.22s ease, border-color 0.22s ease, color 0.22s ease;
+}
+
+.quick-nav-btn:hover {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #171717;
+}
+
 .brand-logo {
   width: min(190px, 30vw);
   height: auto;
@@ -867,6 +898,20 @@ p {
     font-size: clamp(1.7rem, 6vw, 2.6rem);
   }
 
+  .nav-actions {
+    gap: 8px;
+  }
+
+  .quick-nav {
+    gap: 6px;
+  }
+
+  .quick-nav-btn {
+    padding: 7px 10px;
+    font-size: 0.64rem;
+    cursor: pointer;
+  }
+
   .about-hero {
     min-height: 68vh;
   }
@@ -879,6 +924,19 @@ p {
 @media (max-width: 620px) {
   .section {
     padding: 74px 0;
+  }
+
+  .nav-wrap {
+    min-height: 86px;
+  }
+
+  .brand-logo {
+    width: min(142px, 42vw);
+  }
+
+  .quick-nav-btn {
+    padding: 6px 9px;
+    font-size: 0.6rem;
   }
 
   .hero {

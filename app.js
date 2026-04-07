@@ -168,6 +168,9 @@ const PROJECTS = [
   }
 ];
 
+const PROJECT_HASH_PREFIX = "#project-";
+const HOME_HASH = "#home";
+
 function useRevealOnScroll() {
   useEffect(() => {
     const elements = document.querySelectorAll("[data-reveal]");
@@ -330,10 +333,89 @@ function App() {
   const activeNav = menuFocus ? NAV_ITEMS.find((item) => item.id === menuFocus) : null;
 
   useEffect(() => {
+    const syncProjectFromHash = () => {
+      const hash = window.location.hash;
+      if (!hash.startsWith(PROJECT_HASH_PREFIX)) {
+        setActiveProjectId("");
+        return;
+      }
+
+      const projectId = hash.slice(PROJECT_HASH_PREFIX.length);
+      const hasProject = PROJECTS.some((project) => project.id === projectId);
+      setActiveProjectId(hasProject ? projectId : "");
+    };
+
+    syncProjectFromHash();
+    window.addEventListener("popstate", syncProjectFromHash);
+    window.addEventListener("hashchange", syncProjectFromHash);
+    return () => {
+      window.removeEventListener("popstate", syncProjectFromHash);
+      window.removeEventListener("hashchange", syncProjectFromHash);
+    };
+  }, []);
+
+  useEffect(() => {
     if (activeProject) {
       document.getElementById("project-view")?.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   }, [activeProject]);
+
+  const openProject = (projectId) => {
+    const nextHash = `${PROJECT_HASH_PREFIX}${projectId}`;
+    if (window.location.hash !== nextHash) {
+      window.history.pushState({ view: "project", projectId }, "", nextHash);
+    }
+    setActiveProjectId(projectId);
+  };
+
+  const closeProject = () => {
+    if (window.location.hash.startsWith(PROJECT_HASH_PREFIX)) {
+      window.history.back();
+      return;
+    }
+    setActiveProjectId("");
+  };
+
+  const onHomeClick = () => {
+    setMobileOpen(false);
+    setMenuFocus("");
+    setActiveProjectId("");
+    setAboutExpanded(false);
+
+    if (window.location.hash !== HOME_HASH) {
+      window.history.pushState({ view: "home" }, "", HOME_HASH);
+    }
+
+    window.requestAnimationFrame(() => {
+      document.getElementById("home")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  };
+
+  const onBackStep = () => {
+    if (mobileOpen) {
+      setMobileOpen(false);
+      return;
+    }
+    if (menuFocus) {
+      setMenuFocus("");
+      return;
+    }
+    if (activeProjectId) {
+      closeProject();
+      return;
+    }
+    if (aboutExpanded && window.location.hash !== "#about") {
+      setAboutExpanded(false);
+      return;
+    }
+
+    if (window.location.hash && window.location.hash !== HOME_HASH && window.location.hash !== "#top") {
+      window.history.back();
+      return;
+    }
+
+    onHomeClick();
+  };
 
   const onFieldChange = (event) => {
     const { name, value } = event.target;
@@ -367,6 +449,9 @@ function App() {
       setAboutExpanded(true);
       setMenuFocus("");
       setMobileOpen(false);
+      if (window.location.hash !== "#about") {
+        window.history.pushState({ view: "about" }, "", "#about");
+      }
       window.requestAnimationFrame(() => {
         document.getElementById("about")?.scrollIntoView({ behavior: "smooth", block: "start" });
       });
@@ -394,18 +479,24 @@ function App() {
           <a className="brand" href="#top" aria-label="Skape home">
             <img src="assets/logo.png" alt="Skape logo" className="brand-logo" />
           </a>
-          <button
-            className=${`menu-toggle ${mobileOpen ? "open" : ""}`}
-            aria-expanded=${mobileOpen}
-            aria-label=${mobileOpen ? "Close menu" : "Open menu"}
-            onClick=${() => setMobileOpen((v) => !v)}
-          >
-            <span className="menu-box"></span>
-            <div className="menu-lines">
-              <span></span>
-              <span></span>
+          <div className="nav-actions">
+            <div className="quick-nav">
+              <button type="button" className="quick-nav-btn" onClick=${onBackStep}>Back</button>
+              <button type="button" className="quick-nav-btn" onClick=${onHomeClick}>Home</button>
             </div>
-          </button>
+            <button
+              className=${`menu-toggle ${mobileOpen ? "open" : ""}`}
+              aria-expanded=${mobileOpen}
+              aria-label=${mobileOpen ? "Close menu" : "Open menu"}
+              onClick=${() => setMobileOpen((v) => !v)}
+            >
+              <span className="menu-box"></span>
+              <div className="menu-lines">
+                <span></span>
+                <span></span>
+              </div>
+            </button>
+          </div>
         </div>
       </header>
 
@@ -568,7 +659,7 @@ function App() {
                       <p className="project-type">${project.banner}</p>
                       <h3>${project.title}</h3>
                       <p>${project.subtitle}</p>
-                      <button className="inline-link" onClick=${() => setActiveProjectId(project.id)}>View Project</button>
+                      <button className="inline-link" onClick=${() => openProject(project.id)}>View Project</button>
                     </div>
                   </article>
                 `
@@ -578,7 +669,7 @@ function App() {
         </section>
 
         ${activeProject
-      ? html`<${ProjectDetail} project=${activeProject} onClose=${() => setActiveProjectId("")} />`
+      ? html`<${ProjectDetail} project=${activeProject} onClose=${closeProject} />`
       : null}
 
         <section className="section" id="contact">
