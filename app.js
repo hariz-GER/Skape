@@ -170,6 +170,8 @@ const PROJECTS = [
 
 const PROJECT_HASH_PREFIX = "#project-";
 const HOME_HASH = "#home";
+const SPLASH_DURATION_MS = 6000;
+const REDUCED_MOTION_SPLASH_DURATION_MS = 450;
 
 function useRevealOnScroll() {
   useEffect(() => {
@@ -289,7 +291,9 @@ function App() {
   useCustomCursor();
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setShowSplash(false), 1600);
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const splashDuration = prefersReducedMotion ? REDUCED_MOTION_SPLASH_DURATION_MS : SPLASH_DURATION_MS;
+    const timer = window.setTimeout(() => setShowSplash(false), splashDuration);
     return () => window.clearTimeout(timer);
   }, []);
 
@@ -469,7 +473,20 @@ function App() {
       ${showSplash
       ? html`
             <div className="splash">
-              <img src="assets/logo.png" alt="Skape" className="splash-logo" />
+              <div className="splash-depth-light"></div>
+              <div className="splash-blueprint-grid"></div>
+              <div className="splash-blueprint-grid splash-blueprint-grid-secondary"></div>
+              <div className="splash-vignette"></div>
+              <span className="splash-line splash-line-horizontal"></span>
+              <span className="splash-line splash-line-vertical"></span>
+              <div className="splash-curtain splash-curtain-top"></div>
+              <div className="splash-curtain splash-curtain-bottom"></div>
+              <div className="splash-logo-stage">
+                <img src="assets/logo.png" alt="Skape" className="splash-logo" />
+                <span className="splash-logo-wipe"></span>
+                <span className="splash-logo-glint"></span>
+                <p className="splash-tagline">Architecture | Interiors | Construction</p>
+              </div>
             </div>
           `
       : null}

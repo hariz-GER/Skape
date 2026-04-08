@@ -16,6 +16,9 @@ import Marquee from './components/Marquee';
 import RevealText from './components/RevealText';
 import { NAV_ITEMS, MENU_CONTENT, SERVICES_DATA, PROJECTS_DATA } from './data';
 
+const SPLASH_DURATION_MS = 6000;
+const REDUCED_MOTION_SPLASH_DURATION_MS = 450;
+
 function useRevealOnScroll() {
   useEffect(() => {
     const elements = document.querySelectorAll('[data-reveal]');
@@ -58,17 +61,11 @@ export default function Page() {
   useRevealOnScroll();
 
   useEffect(() => {
-    const splashSeenKey = 'skape-splash-seen';
-    const alreadySeenSplash = window.sessionStorage.getItem(splashSeenKey) === '1';
-
-    if (alreadySeenSplash) {
-      setShowSplash(false);
-      return undefined;
-    }
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const splashDuration = prefersReducedMotion ? REDUCED_MOTION_SPLASH_DURATION_MS : SPLASH_DURATION_MS;
 
     setShowSplash(true);
-    window.sessionStorage.setItem(splashSeenKey, '1');
-    const timer = window.setTimeout(() => setShowSplash(false), 1200);
+    const timer = window.setTimeout(() => setShowSplash(false), splashDuration);
     return () => window.clearTimeout(timer);
   }, []);
 
