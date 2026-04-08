@@ -100,8 +100,8 @@
 
 /* Page Transitions */
 .app-shell {
-    opacity: 0;
-    animation: pageFadeIn 0.55s ease-out forwards;
+    opacity: 1;
+    animation: pageFadeIn 0.55s ease-out both;
 }
 
 @keyframes pageFadeIn {
@@ -110,6 +110,13 @@
     }
 
     to {
+        opacity: 1;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .app-shell {
+        animation: none;
         opacity: 1;
     }
 }
