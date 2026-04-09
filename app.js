@@ -172,6 +172,15 @@ const PROJECT_HASH_PREFIX = "#project-";
 const HOME_HASH = "#home";
 const SPLASH_DURATION_MS = 6000;
 const REDUCED_MOTION_SPLASH_DURATION_MS = 450;
+const SPLASH_PARTICLES = Array.from({ length: 54 }, (_, index) => ({
+  id: index,
+  top: (index * 29) % 100,
+  delay: (index * 0.12) % 3.2,
+  duration: 2.9 + (index % 9) * 0.28,
+  size: 3 + (index % 6) * 2,
+  drift: 6 + (index % 11) * 2,
+  alpha: (0.45 + (index % 5) * 0.12).toFixed(2)
+}));
 
 function useRevealOnScroll() {
   useEffect(() => {
@@ -476,16 +485,31 @@ function App() {
               <div className="splash-depth-light"></div>
               <div className="splash-blueprint-grid"></div>
               <div className="splash-blueprint-grid splash-blueprint-grid-secondary"></div>
+              <div className="splash-particle-field">
+                ${SPLASH_PARTICLES.map(
+        (particle) => html`<span
+                    key=${particle.id}
+                    className="splash-particle"
+                    style=${{
+            "--particle-top": `${particle.top}`,
+            "--particle-delay": `${particle.delay}`,
+            "--particle-duration": `${particle.duration}`,
+            "--particle-size": `${particle.size}`,
+            "--particle-drift": `${particle.drift}`,
+            "--particle-alpha": `${particle.alpha}`
+          }}
+                  ></span>`
+      )}
+              </div>
               <div className="splash-vignette"></div>
-              <span className="splash-line splash-line-horizontal"></span>
-              <span className="splash-line splash-line-vertical"></span>
               <div className="splash-curtain splash-curtain-top"></div>
               <div className="splash-curtain splash-curtain-bottom"></div>
               <div className="splash-logo-stage">
                 <img src="assets/logo.png" alt="Skape" className="splash-logo" />
-                <span className="splash-logo-wipe"></span>
-                <span className="splash-logo-glint"></span>
-                <p className="splash-tagline">Architecture | Interiors | Construction</p>
+                <p className="splash-tagline">
+                  <span className="splash-tagline-text">Architecture | Interiors | Construction</span>
+                  <span className="splash-tagline-wipe"></span>
+                </p>
               </div>
             </div>
           `

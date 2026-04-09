@@ -116,6 +116,34 @@ p {
   animation: splashGridSecondary 6s ease forwards;
 }
 
+.splash-particle-field {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.splash-particle {
+  position: absolute;
+  top: calc(var(--particle-top) * 1%);
+  left: -16%;
+  width: calc(var(--particle-size) * 1px);
+  height: calc(var(--particle-size) * 1px);
+  border-radius: 999px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 248, 228, var(--particle-alpha, 0.65)) 0%,
+    rgba(223, 199, 147, calc(var(--particle-alpha, 0.65) * 0.62)) 42%,
+    rgba(198, 166, 107, 0) 74%
+  );
+  opacity: 0;
+  filter: blur(0.35px) drop-shadow(0 0 14px rgba(223, 199, 147, 0.78));
+  transform: translate3d(0, calc(var(--particle-drift) * -1px), 0) scale(0.7);
+  animation: splashParticleFlow calc(var(--particle-duration) * 1s) linear
+    calc(var(--particle-delay) * 1s) infinite;
+}
+
 .splash-vignette {
   position: absolute;
   inset: 0;
@@ -187,42 +215,42 @@ p {
   animation: splashLogoFloat 6s ease forwards;
 }
 
-.splash-logo-wipe {
-  position: absolute;
-  inset: 4% -2%;
-  background: linear-gradient(
-    102deg,
-    rgba(15, 17, 21, 0) 20%,
-    rgba(223, 199, 147, 0.2) 40%,
-    rgba(255, 255, 255, 0.55) 50%,
-    rgba(223, 199, 147, 0.2) 60%,
-    rgba(15, 17, 21, 0) 80%
-  );
-  mix-blend-mode: screen;
-  transform: translateX(-120%) skewX(-14deg);
-  opacity: 0;
-  animation: splashLogoWipe 2.9s ease 0.65s forwards;
-}
-
-.splash-logo-glint {
-  position: absolute;
-  inset: 11% 9%;
-  border: 1px solid rgba(223, 199, 147, 0.25);
-  box-shadow: inset 0 0 28px rgba(198, 166, 107, 0.14), 0 0 30px rgba(198, 166, 107, 0.2);
-  opacity: 0;
-  animation: splashLogoGlint 6s ease forwards;
-}
-
 .splash-tagline {
+  position: relative;
+  overflow: hidden;
+  display: inline-grid;
+  place-items: center;
   font-family: "Cinzel", serif;
   color: rgba(223, 199, 147, 0.94);
   text-transform: uppercase;
-  letter-spacing: 0.28em;
   font-size: clamp(0.58rem, 1.1vw, 0.86rem);
   text-align: center;
+}
+
+.splash-tagline-text {
+  display: inline-block;
   opacity: 0;
-  transform: translateY(18px);
-  animation: splashTagline 6s ease forwards;
+  transform: translateY(14px);
+  clip-path: inset(0 100% 0 0);
+  letter-spacing: 0.28em;
+  animation: splashTaglineFlow 6s ease forwards;
+}
+
+.splash-tagline-wipe {
+  position: absolute;
+  inset: -22% -8%;
+  background: linear-gradient(
+    102deg,
+    rgba(15, 17, 21, 0) 18%,
+    rgba(223, 199, 147, 0.16) 41%,
+    rgba(255, 255, 255, 0.54) 50%,
+    rgba(223, 199, 147, 0.16) 59%,
+    rgba(15, 17, 21, 0) 82%
+  );
+  mix-blend-mode: screen;
+  opacity: 0;
+  transform: translateX(-125%) skewX(-14deg);
+  animation: splashTaglineWipe 6s ease forwards;
 }
 
 @keyframes splashOverlayFade {
@@ -391,69 +419,77 @@ p {
   }
 }
 
-@keyframes splashLogoWipe {
-  0% {
-    transform: translateX(-120%) skewX(-14deg);
-    opacity: 0;
-  }
-
-  14% {
-    opacity: 0.78;
-  }
-
-  72% {
-    opacity: 0.3;
-  }
-
-  100% {
-    transform: translateX(120%) skewX(-14deg);
-    opacity: 0;
-  }
-}
-
-@keyframes splashLogoGlint {
+@keyframes splashParticleFlow {
   0% {
     opacity: 0;
-    transform: scale(0.95);
+    transform: translate3d(0, calc(var(--particle-drift) * -1px), 0) scale(0.62);
   }
 
-  30% {
-    opacity: 0.46;
-    transform: scale(1);
+  18% {
+    opacity: 0.88;
   }
 
-  60% {
-    opacity: 0.68;
+  64% {
+    opacity: 0.4;
   }
 
   100% {
     opacity: 0;
-    transform: scale(1.03);
+    transform: translate3d(132vw, calc(var(--particle-drift) * 1px), 0) scale(1.05);
   }
 }
 
-@keyframes splashTagline {
+@keyframes splashTaglineFlow {
   0% {
     opacity: 0;
-    transform: translateY(16px);
-    letter-spacing: 0.48em;
+    transform: translateY(14px);
+    clip-path: inset(0 100% 0 0);
+    letter-spacing: 0.44em;
   }
 
-  36% {
+  28% {
     opacity: 1;
     transform: translateY(0);
+    clip-path: inset(0 0 0 0);
     letter-spacing: 0.3em;
   }
 
-  80% {
+  74% {
     opacity: 0.96;
-    transform: translateY(0);
+    clip-path: inset(0 0 0 0);
   }
 
   100% {
     opacity: 0;
-    transform: translateY(-8px);
+    transform: translateY(-6px);
+    clip-path: inset(0 0 0 100%);
     letter-spacing: 0.36em;
+  }
+}
+
+@keyframes splashTaglineWipe {
+  0% {
+    opacity: 0;
+    transform: translateX(-125%) skewX(-14deg);
+  }
+
+  20% {
+    opacity: 0;
+    transform: translateX(-125%) skewX(-14deg);
+  }
+
+  28% {
+    opacity: 0.74;
+  }
+
+  46% {
+    opacity: 0;
+    transform: translateX(125%) skewX(-14deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(125%) skewX(-14deg);
   }
 }
 
@@ -485,8 +521,8 @@ p {
   .splash-depth-light,
   .splash-blueprint-grid,
   .splash-line,
-  .splash-logo-wipe,
-  .splash-logo-glint,
+  .splash-particle,
+  .splash-tagline-wipe,
   .splash-curtain {
     animation: none;
     opacity: 0;
@@ -505,10 +541,15 @@ p {
   }
 
   .splash-tagline {
-    animation: none;
+    overflow: visible;
+  }
+
+  .splash-tagline-text {
     opacity: 1;
     transform: none;
+    clip-path: none;
     letter-spacing: 0.22em;
+    animation: none;
   }
 }
 
