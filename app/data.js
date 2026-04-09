@@ -1,4 +1,5 @@
 import React from 'react';
+import { withBasePath } from './lib/paths';
 
 export const NAV_ITEMS = [
     { id: 'services', label: 'Services' },
@@ -82,11 +83,11 @@ export const RESIDENTIAL_SERVICE_DETAIL = {
         }
     ],
     heroImage: {
-        src: '/assets/residential-hero.jpg',
+        src: withBasePath('/assets/residential-hero.jpg'),
         alt: 'Architectural planning desk with drawings and a laptop'
     },
     landscapeImage: {
-        src: '/assets/residential-landscape.jpg',
+        src: withBasePath('/assets/residential-landscape.jpg'),
         alt: 'Residential landscape lighting and outdoor seating'
     }
 };

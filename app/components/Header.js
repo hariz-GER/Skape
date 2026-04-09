@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { withBasePath } from '../lib/paths';
 
 export default function Header({ mobileOpen, setMobileOpen, scrolled, hideHeader }) {
     const pathname = usePathname();
@@ -22,13 +23,13 @@ export default function Header({ mobileOpen, setMobileOpen, scrolled, hideHeader
             {showBrandOnly ? (
                 <div className="brand-only">
                     <Link className="brand" href="/" aria-label="Skape home" onClick={onBrandClick}>
-                        <img src="/assets/logo.png" alt="Skape logo" className="brand-logo" />
+                        <img src={withBasePath('/assets/logo.png')} alt="Skape logo" className="brand-logo" />
                     </Link>
                 </div>
             ) : (
                 <div className="container nav-wrap">
                     <Link className="brand" href="/" aria-label="Skape home" onClick={onBrandClick}>
-                        <img src="/assets/logo.png" alt="Skape logo" className="brand-logo" />
+                        <img src={withBasePath('/assets/logo.png')} alt="Skape logo" className="brand-logo" />
                     </Link>
                     <button
                         className={`menu-toggle ${mobileOpen ? 'open' : ''}`}

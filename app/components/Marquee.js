@@ -1,5 +1,7 @@
 'use client';
 
+import { withBasePath } from '../lib/paths';
+
 const MARQUEE_ROW_ONE = [
     'https://minaleandmann.com/wp-content/uploads/2018/01/2-8.jpg',
     'https://minaleandmann.com/wp-content/uploads/2018/01/3-7.jpg',
@@ -13,14 +15,14 @@ const MARQUEE_ROW_TWO = [
     'https://minaleandmann.com/wp-content/uploads/2018/01/5-5.jpg',
     'https://minaleandmann.com/wp-content/uploads/2018/01/6-3.jpg',
     'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80',
-    '/assets/hero-bg.jpg',
+    withBasePath('/assets/hero-bg.jpg'),
     'https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=1200&q=80',
     'https://images.unsplash.com/photo-1600047509358-9dc75507daeb?auto=format&fit=crop&w=1200&q=80',
 ];
 
 const LOCAL_FALLBACK_IMAGES = [
-    '/assets/hero-bg.jpg',
-    '/assets/about-philosophy-reference.jpg',
+    withBasePath('/assets/hero-bg.jpg'),
+    withBasePath('/assets/about-philosophy-reference.jpg'),
 ];
 
 export default function Marquee() {

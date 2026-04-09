@@ -1,5 +1,7 @@
 'use client';
 
+import { withBasePath } from '../lib/paths';
+
 const SPLASH_PARTICLES = Array.from({ length: 54 }, (_, index) => ({
   id: index,
   top: (index * 29) % 100,
@@ -38,7 +40,7 @@ export default function Splash() {
       <div className="splash-curtain splash-curtain-bottom" />
 
       <div className="splash-logo-stage">
-        <img src="/assets/logo.png" alt="Skape" className="splash-logo" />
+        <img src={withBasePath('/assets/logo.png')} alt="Skape" className="splash-logo" />
         <p className="splash-tagline">
           <span className="splash-tagline-text">Architecture | Interiors | Construction</span>
           <span className="splash-tagline-wipe" />

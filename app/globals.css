@@ -1115,8 +1115,9 @@ p {
 .hero-image-layer {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, rgba(15, 17, 21, 0.2), var(--bg)),
-    url("/assets/hero-bg.jpg") center/cover no-repeat;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
   z-index: -1;
 }
 

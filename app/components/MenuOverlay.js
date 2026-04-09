@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
+import { withBasePath } from '../lib/paths';
 
 export default function MenuOverlay({
     mobileOpen,
@@ -177,7 +178,7 @@ export default function MenuOverlay({
         <>
             {isRouteLoading && (
                 <div className="route-loading-overlay" role="status" aria-live="polite" aria-label="Loading page">
-                    <img src="/assets/logo.png" alt="Skape loading" className="route-loading-logo" />
+                    <img src={withBasePath('/assets/logo.png')} alt="Skape loading" className="route-loading-logo" />
                 </div>
             )}
 

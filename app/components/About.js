@@ -1,6 +1,11 @@
 'use client';
 
+import { withBasePath, withBasePathHash } from '../lib/paths';
+
 export default function About() {
+    const philosophyImagePrimary = withBasePath('/assets/about-philosophy-1.jpg');
+    const philosophyImageSecondary = withBasePath('/assets/about-philosophy-2.jpg');
+
     const coreValues = [
         {
             title: 'Structural Integrity',
@@ -88,25 +93,25 @@ export default function About() {
                         <div className="about-philosophy-gallery">
                             <figure className="about-philosophy-photo">
                                 <img
-                                    src="/assets/about-philosophy-1.jpg"
+                                    src={philosophyImagePrimary}
                                     alt="Contemporary interior with layered textures and warm natural light"
                                     loading="lazy"
                                     onError={(event) => {
                                         if (event.currentTarget.dataset.fallbackApplied === '1') return;
                                         event.currentTarget.dataset.fallbackApplied = '1';
-                                        event.currentTarget.src = '/assets/about-philosophy-2.jpg';
+                                        event.currentTarget.src = philosophyImageSecondary;
                                     }}
                                 />
                             </figure>
                             <figure className="about-philosophy-photo">
                                 <img
-                                    src="/assets/about-philosophy-2.jpg"
+                                    src={philosophyImageSecondary}
                                     alt="Refined interior composition with balanced form and material contrast"
                                     loading="lazy"
                                     onError={(event) => {
                                         if (event.currentTarget.dataset.fallbackApplied === '1') return;
                                         event.currentTarget.dataset.fallbackApplied = '1';
-                                        event.currentTarget.src = '/assets/about-philosophy-1.jpg';
+                                        event.currentTarget.src = philosophyImagePrimary;
                                     }}
                                 />
                             </figure>
@@ -152,10 +157,10 @@ export default function About() {
                         <h3>Start Your Project</h3>
                         <p>Tell us what you want to build, renovate, or redesign. We will take it from concept to completion.</p>
                         <div className="about-actions">
-                        <a href="/#contact" className="btn btn-primary btn-min">
+                        <a href={withBasePathHash('#contact')} className="btn btn-primary btn-min">
                             Contact Us
                         </a>
-                        <a href="/#contact" className="btn btn-line btn-min">
+                        <a href={withBasePathHash('#contact')} className="btn btn-line btn-min">
                             Forms
                         </a>
                         </div>

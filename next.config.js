@@ -12,7 +12,10 @@ const nextConfig = {
     unoptimized: true
   },
   basePath,
-  assetPrefix: basePath ? `${basePath}/` : undefined
+  assetPrefix: basePath ? `${basePath}/` : undefined,
+  env: {
+    NEXT_PUBLIC_BASE_PATH: basePath
+  }
 };
 
 module.exports = nextConfig;
