@@ -134,6 +134,14 @@ export default function Page() {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
+  const createMailtoLink = ({ name, email, message }) => {
+    const subject = encodeURIComponent(`New inquiry from ${name}`);
+    const body = encodeURIComponent(
+      `Name: ${name}\nEmail: ${email}\n\nProject Brief:\n${message}`
+    );
+    return `mailto:skapedesign.in@gmail.com?subject=${subject}&body=${body}`;
+  };
+
   const onSubmit = async (event) => {
     event.preventDefault();
     const nextErrors = {};
@@ -150,24 +158,42 @@ export default function Page() {
       return;
     }
 
+    const cleanPayload = {
+      name: form.name.trim(),
+      email: form.email.trim(),
+      message: form.message.trim(),
+    };
+    const mailtoLink = createMailtoLink(cleanPayload);
+    const isGithubPagesHost =
+      typeof window !== 'undefined' && /\.github\.io$/i.test(window.location.hostname);
+
     try {
       setIsSubmitting(true);
       setStatus('Saving your inquiry...');
+
+      if (isGithubPagesHost) {
+        window.location.href = mailtoLink;
+        setStatus('GitHub Pages is live in static mode. Your email app was opened to send the inquiry.');
+        setForm({ name: '', email: '', message: '' });
+        return;
+      }
 
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          name: form.name.trim(),
-          email: form.email.trim(),
-          message: form.message.trim(),
-        }),
+        body: JSON.stringify(cleanPayload),
       });
 
       const result = await response.json().catch(() => ({}));
       if (!response.ok) {
+        if (response.status === 404 || response.status === 405) {
+          window.location.href = mailtoLink;
+          setStatus('This deployment is static. Your email app was opened to send the inquiry.');
+          setForm({ name: '', email: '', message: '' });
+          return;
+        }
         setStatus(result.error || 'Unable to save inquiry right now. Please try again.');
         return;
       }
@@ -175,7 +201,8 @@ export default function Page() {
       setStatus('Thank you. Your inquiry has been saved successfully.');
       setForm({ name: '', email: '', message: '' });
     } catch (_error) {
-      setStatus('Unable to save inquiry right now. Please try again.');
+      window.location.href = mailtoLink;
+      setStatus('Unable to reach server endpoint here. Your email app was opened to send the inquiry.');
     } finally {
       setIsSubmitting(false);
     }
