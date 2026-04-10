@@ -31,7 +31,17 @@ jobs:
           cache: npm
 
       - name: Install Dependencies
-        run: npm ci --no-audit --no-fund || npm install --no-audit --no-fund
+        run: |
+          set -e
+          for attempt in 1 2 3; do
+            echo "Install attempt ${attempt}..."
+            npm ci --no-audit --no-fund && exit 0
+            npm install --no-audit --no-fund && exit 0
+            echo "Attempt ${attempt} failed. Retrying in 15s..."
+            sleep 15
+          done
+          echo "Dependency installation failed after 3 attempts."
+          exit 1
 
       - name: Build Static Site
         run: npm run build
@@ -43,6 +53,13 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./out
+
+      - name: Print npm logs on failure
+        if: failure()
+        run: |
+          echo "npm debug logs:"
+          ls -la ~/.npm/_logs || true
+          cat ~/.npm/_logs/* || true
 
   deploy:
     needs: build
