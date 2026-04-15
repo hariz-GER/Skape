@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const HERO_SLIDES = [
   {
@@ -47,9 +47,14 @@ export default function Page() {
   const [showIntro, setShowIntro] = useState(true);
   const [activeSlide, setActiveSlide] = useState(0);
   const [activePlan, setActivePlan] = useState(0);
+  const [useFancyCursor, setUseFancyCursor] = useState(false);
+  const [isHeaderScrolled, setIsHeaderScrolled] = useState(false);
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' });
   const [status, setStatus] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const cursorDotRef = useRef(null);
+  const cursorRingRef = useRef(null);
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -87,6 +92,98 @@ export default function Page() {
     targets.forEach((node) => observer.observe(node));
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    const pointerQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
+    const syncCursorMode = () => setUseFancyCursor(pointerQuery.matches);
+    syncCursorMode();
+
+    if (pointerQuery.addEventListener) {
+      pointerQuery.addEventListener('change', syncCursorMode);
+      return () => pointerQuery.removeEventListener('change', syncCursorMode);
+    }
+
+    pointerQuery.addListener(syncCursorMode);
+    return () => pointerQuery.removeListener(syncCursorMode);
+  }, []);
+
+  useEffect(() => {
+    const onScroll = () => setIsHeaderScrolled(window.scrollY > 36);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = isMobileNavOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileNavOpen]);
+
+  useEffect(() => {
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') setIsMobileNavOpen(false);
+    };
+
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, []);
+
+  useEffect(() => {
+    if (!useFancyCursor) return undefined;
+
+    const dot = cursorDotRef.current;
+    const ring = cursorRingRef.current;
+    if (!dot || !ring) return undefined;
+
+    let x = window.innerWidth / 2;
+    let y = window.innerHeight / 2;
+    let rx = x;
+    let ry = y;
+    let rafId = null;
+
+    const onMove = (event) => {
+      x = event.clientX;
+      y = event.clientY;
+      dot.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+    };
+
+    const tick = () => {
+      rx += (x - rx) * 0.2;
+      ry += (y - ry) * 0.2;
+      ring.style.transform = `translate3d(${rx}px, ${ry}px, 0)`;
+      rafId = window.requestAnimationFrame(tick);
+    };
+
+    const onEnter = () => {
+      dot.classList.add('is-hover');
+      ring.classList.add('is-hover');
+    };
+
+    const onLeave = () => {
+      dot.classList.remove('is-hover');
+      ring.classList.remove('is-hover');
+    };
+
+    const interactive = Array.from(document.querySelectorAll('.cp-site a, .cp-site button, .cp-site input, .cp-site textarea'));
+    interactive.forEach((el) => {
+      el.addEventListener('mouseenter', onEnter);
+      el.addEventListener('mouseleave', onLeave);
+    });
+
+    document.addEventListener('mousemove', onMove, { passive: true });
+    rafId = window.requestAnimationFrame(tick);
+
+    return () => {
+      document.removeEventListener('mousemove', onMove);
+      interactive.forEach((el) => {
+        el.removeEventListener('mouseenter', onEnter);
+        el.removeEventListener('mouseleave', onLeave);
+      });
+      if (rafId) window.cancelAnimationFrame(rafId);
+    };
+  }, [useFancyCursor, isMobileNavOpen]);
 
   const nextSlide = () => setActiveSlide((prev) => (prev + 1) % HERO_SLIDES.length);
   const prevSlide = () =>
@@ -164,7 +261,14 @@ export default function Page() {
   };
 
   return (
-    <div className="cp-site">
+    <div className={`cp-site ${useFancyCursor ? 'has-fancy-cursor' : ''}`}>
+      {useFancyCursor && (
+        <>
+          <div className="cp-cursor cp-cursor-dot" ref={cursorDotRef} aria-hidden="true" />
+          <div className="cp-cursor cp-cursor-ring" ref={cursorRingRef} aria-hidden="true" />
+        </>
+      )}
+
       {showIntro && (
         <div className="cp-intro" aria-hidden="true">
           <div className="cp-intro-mark">SKAPE</div>
@@ -172,7 +276,41 @@ export default function Page() {
         </div>
       )}
 
-      <header className="cp-header">
+      <div
+        className={`cp-mobile-nav ${isMobileNavOpen ? 'is-open' : ''}`}
+        aria-hidden={!isMobileNavOpen}
+        onClick={() => setIsMobileNavOpen(false)}
+      >
+        <a
+          href="#portfolio"
+          onClick={(event) => {
+            event.stopPropagation();
+            setIsMobileNavOpen(false);
+          }}
+        >
+          Portfolio
+        </a>
+        <a
+          href="#story"
+          onClick={(event) => {
+            event.stopPropagation();
+            setIsMobileNavOpen(false);
+          }}
+        >
+          Story
+        </a>
+        <a
+          href="#contact"
+          onClick={(event) => {
+            event.stopPropagation();
+            setIsMobileNavOpen(false);
+          }}
+        >
+          Contact
+        </a>
+      </div>
+
+      <header className={`cp-header ${isHeaderScrolled ? 'is-scrolled' : ''}`}>
         <a href="#" className="cp-logo" aria-label="Skape Home">
           SKAPE
         </a>
@@ -181,6 +319,17 @@ export default function Page() {
           <a href="#story">Story</a>
           <a href="#contact">Contact</a>
         </nav>
+        <button
+          type="button"
+          className={`cp-menu-btn ${isMobileNavOpen ? 'is-open' : ''}`}
+          aria-label="Toggle navigation menu"
+          aria-expanded={isMobileNavOpen}
+          onClick={() => setIsMobileNavOpen((prev) => !prev)}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
       </header>
 
       <main>
@@ -428,11 +577,6 @@ export default function Page() {
       <footer className="cp-footer">Skape Architecture Studio</footer>
 
       <style jsx global>{`
-        .cp-site,
-        .cp-site * {
-          cursor: auto;
-        }
-
         .cp-site {
           --cp-bg: #111214;
           --cp-bg-soft: #181a1f;
@@ -447,6 +591,54 @@ export default function Page() {
           color: var(--cp-text);
           font-family: 'Manrope', sans-serif;
           min-height: 100vh;
+        }
+
+        .cp-site.has-fancy-cursor,
+        .cp-site.has-fancy-cursor * {
+          cursor: none;
+        }
+
+        .cp-cursor {
+          position: fixed;
+          top: 0;
+          left: 0;
+          z-index: 120;
+          pointer-events: none;
+          transform: translate3d(-100px, -100px, 0);
+          transition: width 0.25s ease, height 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+        }
+
+        .cp-cursor-dot {
+          width: 10px;
+          height: 10px;
+          border-radius: 999px;
+          background: rgba(255, 255, 255, 0.95);
+          mix-blend-mode: difference;
+        }
+
+        .cp-cursor-ring {
+          width: 36px;
+          height: 36px;
+          margin-top: -13px;
+          margin-left: -13px;
+          border-radius: 999px;
+          border: 1px solid rgba(255, 255, 255, 0.5);
+          mix-blend-mode: difference;
+        }
+
+        .cp-cursor-dot.is-hover {
+          width: 16px;
+          height: 16px;
+          margin-top: -3px;
+          margin-left: -3px;
+        }
+
+        .cp-cursor-ring.is-hover {
+          width: 56px;
+          height: 56px;
+          margin-top: -23px;
+          margin-left: -23px;
+          border-color: rgba(255, 255, 255, 0.78);
         }
 
         .cp-intro {
@@ -484,13 +676,21 @@ export default function Page() {
           top: 0;
           left: 0;
           width: 100%;
-          z-index: 50;
+          z-index: 90;
           padding: 22px clamp(18px, 3vw, 42px);
           display: flex;
           justify-content: space-between;
           align-items: center;
           color: #fff;
           mix-blend-mode: difference;
+          transition: background 0.35s ease, border-color 0.35s ease;
+        }
+
+        .cp-header.is-scrolled {
+          mix-blend-mode: normal;
+          background: rgba(10, 11, 14, 0.85);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+          backdrop-filter: blur(10px);
         }
 
         .cp-logo {
@@ -511,6 +711,63 @@ export default function Page() {
           font-size: 0.75rem;
           letter-spacing: 0.16em;
           text-transform: uppercase;
+        }
+
+        .cp-menu-btn {
+          display: none;
+          border: 0;
+          background: transparent;
+          width: 34px;
+          height: 28px;
+          padding: 0;
+          position: relative;
+          z-index: 85;
+        }
+
+        .cp-menu-btn span {
+          display: block;
+          width: 100%;
+          height: 1px;
+          background: currentColor;
+          margin: 6px 0;
+          transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .cp-menu-btn.is-open span:nth-child(1) {
+          transform: translateY(7px) rotate(45deg);
+        }
+
+        .cp-menu-btn.is-open span:nth-child(2) {
+          opacity: 0;
+        }
+
+        .cp-menu-btn.is-open span:nth-child(3) {
+          transform: translateY(-7px) rotate(-45deg);
+        }
+
+        .cp-mobile-nav {
+          position: fixed;
+          inset: 0;
+          z-index: 70;
+          display: grid;
+          place-content: center;
+          gap: 18px;
+          background: rgba(10, 11, 14, 0.96);
+          opacity: 0;
+          pointer-events: none;
+          transition: opacity 0.35s ease;
+        }
+
+        .cp-mobile-nav.is-open {
+          opacity: 1;
+          pointer-events: auto;
+        }
+
+        .cp-mobile-nav a {
+          font: 500 clamp(1.3rem, 7vw, 2rem) / 1.1 'Cinzel', serif;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          text-align: center;
         }
 
         .cp-hero {
@@ -980,11 +1237,11 @@ export default function Page() {
           }
 
           .cp-nav {
-            gap: 14px;
+            display: none;
           }
 
-          .cp-nav a {
-            font-size: 0.62rem;
+          .cp-menu-btn {
+            display: block;
           }
 
           .cp-hero-content {
